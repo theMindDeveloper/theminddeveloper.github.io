@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Not found</title>
+<script>
+  // /llm/anything -> /largelanguagemind/anything
+  var p = location.pathname;
+  if (/^\/llm(\/|$)/i.test(p)) {
+    location.replace('/largelanguagemind' + p.replace(/^\/llm/i, '') + location.search + location.hash);
+  }
+</script>
+</head>
+<body>
+<p>Page not found. <a href="/largelanguagemind/">Go to Large Language Mind</a></p>
+</body>
+</html>
