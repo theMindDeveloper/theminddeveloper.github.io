@@ -1254,7 +1254,7 @@ html { scroll-padding-top: 84px; }
    height (38px block + 18px space): the cube and the words keep exactly the overlap they had before */
 @media (max-width: 1099px) { #cube-tile { --cube-top: 100px; } }
 @media (max-width: 900px)  { #cube-tile { --cube-top: 92px; } }
-@media (max-width: 640px)  { #cube-tile { --cube-top: 74px; } }
+@media (max-width: 640px)  { #cube-tile { --cube-top: 67px; } }
 /* ── hero v3 (reviewed): one quiet line above the headline, the apps as a light line of names with their colour
    dots, two equal buttons and one small line under them. The full palette lives in the cube and the day bar only. */
 #cube-tile .h-copy > .h-eyebrow { position: relative; z-index: 3; margin: 0 0 -8px; font-size: 14px; font-weight: 700; letter-spacing: 0.02em; color: rgba(26, 22, 18, 0.62); }
@@ -1292,8 +1292,6 @@ main .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto aut
   .h-strip a + a { box-shadow: inset 0 1px 0 #2f2b24; }
 }
 @media (max-width: 640px) {
-  .h1-a { display: block; }
-  #cube-tile .h-copy > h1 { font-size: clamp(42px, 12.4vw, 50px); }
   #cube-tile .h-copy > .h-actions .btn { flex: 1 1 100%; justify-content: center; }
   #cube-tile .h-copy > .h-actions .btn-ink { min-height: 52px; } #cube-tile .h-copy > .h-actions .h-see { min-height: 48px; }
   .h-apps span { font-size: 14px; }
@@ -1313,3 +1311,26 @@ main .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto aut
    below its lowest card */
 @media (max-width: 640px) { #cube-tile .h-copy > .h-apps { margin-top: max(16px, calc(71vw - 218px)); } }
 @media (min-width: 481px) and (max-width: 640px) { #cube-tile .h-copy > .h-apps { margin-top: max(16px, calc(60vw - 200px)); } }
+/* ── hero on large screens (design loop): the content keeps a readable width inside the tile, the cube comes in to
+   meet the text, and the text block sits level with the cube instead of pinned to the top */
+@media (min-width: 1100px) {
+  #cube-tile { --inner: max(0px, calc((100cqw - 1480px) / 2)); --cube-w: min(46cqw, 720px, calc((100svh - 330px) * 1.4)); --cube-right: calc(var(--inner) + 2cqw); }
+  #cube-tile .h-copy { padding-left: calc(var(--pad) + var(--inner)); padding-right: calc(var(--pad) + var(--inner)); }
+  #cube-tile .h-copy > .h-eyebrow { margin-top: auto; }
+  #cube-tile .h-copy > .h-meta { margin-bottom: auto; }
+  #cube-tile .h-copy > .h-today { margin-top: 40px; }
+  #cube-tile .h-copy > .h-apps span { font-size: clamp(16px, 1vw, 18px); }
+  #cube-tile .h-copy > .h-meta { font-size: clamp(13px, 0.8vw, 15px); }
+  #cube-tile .h-copy > .h-eyebrow { font-size: clamp(14px, 0.85vw, 16px); }
+}
+@media (min-width: 1100px) {
+  #cube-tile .h-copy > h1 { font-size: clamp(46px, 6.4vw, 92px); }
+  #cube-tile { --cube-w: min(46cqw, 680px, calc((100svh - 330px) * 1.4)); --cube-right: calc(var(--inner) + 1cqw); }
+  #cube-tile .h-copy > .h-apps { max-width: 760px; }
+}
+@media (min-width: 1100px) { #cube-tile .h-copy > h1#title { font-size: clamp(46px, 6.4vw, 92px); } }
+@media (min-width: 1100px) {
+  .h-strip { padding-inline: calc(max(0px, (100% - 1480px) / 2) + clamp(24px, 4vw, 56px) - 26px); }
+}
+@media (min-width: 1100px) and (max-width: 1399px) { #cube-tile .h-copy > .h-apps { max-width: var(--text-w); } }
+@media (min-width: 1100px) { #cube-tile .h-copy > .h-actions { max-width: none; flex-wrap: nowrap; } }
