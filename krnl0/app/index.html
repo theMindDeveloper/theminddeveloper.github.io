@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head><script>(function(){
+  var q = new URLSearchParams(location.search), mem = {};
+  if (q.get('dock')) mem['krnl0-dock-style'] = q.get('dock');
+  mem['krnl0-theme'] = q.get('theme') || 'dark';
+  if (q.get('orb')) { var o = q.get('orb').split(','); mem['krnl0-orb-pos-v4'] = JSON.stringify({ x: +o[0], y: +o[1] }); }
+  var P = Storage.prototype, get = P.getItem, set = P.setItem, del = P.removeItem;
+  var mine = function (s) { try { return s === window.localStorage; } catch (e) { return false; } };
+  P.getItem = function (k) { return mine(this) ? (k in mem ? mem[k] : null) : get.call(this, k); };
+  P.setItem = function (k, v) { if (mine(this)) mem[k] = String(v); else set.call(this, k, v); };
+  P.removeItem = function (k) { if (mine(this)) delete mem[k]; else del.call(this, k); };
+  // a page holds many embeds, and each one's orb would greet out loud at once: only the radio may make sound
+  // and a silent embed should not download the voice clips either: new Audio(url) gets an element with no source
+  if (q.get('solo') !== 'radio') {
+    HTMLAudioElement.prototype.play = function () { return Promise.resolve(); };
+    var A = window.Audio; window.Audio = function () { var a = new A(); a.preload = 'none'; return a; }; window.Audio.prototype = A.prototype;
+    if (window.speechSynthesis) window.speechSynthesis.speak = function () {};
+  }
+  // iPhone: web audio is held silent behind the ring/silent switch and can start paused. On every tap, ask for the
+  // media playback session, resume any paused audio context, and once play a short silent clip, which moves the
+  // page onto that session on older iOS too.
+  (function () {
+    var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+    var all = [], silent = null;
+    var W = function (o) { var c = o === undefined ? new AC() : new AC(o); all.push(c); return c; };
+    W.prototype = AC.prototype; window.AudioContext = W; if (window.webkitAudioContext) window.webkitAudioContext = W;
+    var clip = function () {
+      var n = 800, b = new Uint8Array(44 + n), d = new DataView(b.buffer), s = function (o, t) { for (var i = 0; i < 4; i++) b[o + i] = t.charCodeAt(i); };
+      s(0, 'RIFF'); d.setUint32(4, 36 + n, true); s(8, 'WAVE'); s(12, 'fmt '); d.setUint32(16, 16, true); d.setUint16(20, 1, true); d.setUint16(22, 1, true);
+      d.setUint32(24, 8000, true); d.setUint32(28, 8000, true); d.setUint16(32, 1, true); d.setUint16(34, 8, true); s(36, 'data'); d.setUint32(40, n, true);
+      for (var i = 44; i < b.length; i++) b[i] = 128;
+      var a = document.createElement('audio'); a.setAttribute('playsinline', ''); a.src = URL.createObjectURL(new Blob([b], { type: 'audio/wav' })); return a;
+    };
+    var wake = function () {
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+      for (var i = 0; i < all.length; i++) if (all[i].state === 'suspended' || all[i].state === 'interrupted') { var p = all[i].resume(); if (p && p.catch) p.catch(function () {}); }
+      if (!silent && q.get('solo') === 'radio') { try { silent = clip(); var r = silent.play(); if (r && r.catch) r.catch(function () {}); } catch (e) {} }
+    };
+    ['pointerdown', 'touchend', 'click', 'keydown'].forEach(function (t) { addEventListener(t, wake, true); addEventListener(t, wake, false); });
+  })();
+  // phones and tablets: the frame-style windows are whole boards shown small, and each board's video node would
+  // start its own hidden YouTube player, three at once in one section: more than iPhone Safari holds, so the page
+  // crashed and reloaded. There, those windows leave the player out and draw at 1x, all a window that small shows.
+  if (q.get('dock') && matchMedia('(pointer: coarse)').matches) {
+    try { Object.defineProperty(window, 'devicePixelRatio', { get: function () { return 1; }, configurable: true }); } catch (e) {}
+    var far = function (v) { return /youtube\.com|youtu\.be|ytimg|vimeo|soundcloud/i.test(String(v)); };
+    var sa = Element.prototype.setAttribute;
+    Element.prototype.setAttribute = function (k, v) {
+      if ((this instanceof HTMLIFrameElement || this instanceof HTMLScriptElement) && String(k).toLowerCase() === 'src' && far(v)) v = 'about:blank';
+      return sa.call(this, k, v);
+    };
+    [HTMLIFrameElement.prototype, HTMLScriptElement.prototype].forEach(function (P) {
+      var d = Object.getOwnPropertyDescriptor(P, 'src'); if (!d || !d.set) return;
+      Object.defineProperty(P, 'src', { get: d.get, set: function (v) { d.set.call(this, far(v) ? 'about:blank' : v); }, configurable: true });
+    });
+  }
+  // an embed that focuses one of its own fields (a list's input, the terminal) must never scroll the page it sits
+  // in: Safari would carry the visitor from the top of the site down to that tile on the first load
+  if (window !== window.parent) {
+    var fo = HTMLElement.prototype.focus;
+    HTMLElement.prototype.focus = function (o) { var x = {}; if (o) for (var k in o) x[k] = o[k]; x.preventScroll = true; return fo.call(this, x); };
+  }
+  // the site's radio plays one sound at a time: picking a sound switches the others off. Stacked layers kept
+  // growing the panel past its tile on phones, and Safari washed the picture out to white with several on.
+  if (q.get('solo') === 'radio') {
+    addEventListener('click', function (e) {
+      var b = e.target && e.target.closest && e.target.closest('[data-testid^="ambient-radio-preset-"]'); if (!b) return;
+      var id = b.getAttribute('data-testid').slice(21);
+      if (document.querySelector('[data-testid="ambient-radio-layer-remove-' + id + '"]')) return;
+      setTimeout(function () {
+        document.querySelectorAll('[data-testid^="ambient-radio-layer-remove-"]').forEach(function (x) { if (x.getAttribute('data-testid').slice(27) !== id) x.click(); });
+      }, 0);
+    }, true);
+  }
+  // the radio has its own embed; in the full app it would sit on the calendar's edge
+  if (q.get('solo') !== 'radio') document.write('<style>[data-testid="ambient-radio"]{display:none!important}</style>');
+  // bare: only the part itself is painted; the page around it is see-through
+  if (q.get('bare') || q.get('solo') === 'radio') document.write('<style>:root{color-scheme:normal!important}html,body,#root{background:transparent!important}</style>');
+})();</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KRNL0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Geist:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="./assets/app.js?v=daaaea2035"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

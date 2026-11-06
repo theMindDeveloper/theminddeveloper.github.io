@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KRNL0 — your whole day on one canvas</title>
+<meta name="description" content="KRNL0 puts your timer, to-do list, habits, calendar and day clock on one canvas, working together. Plan the day, see where the time went, keep your streaks. Free, no account, and your plans stay on your computer.">
+<link rel="icon" href="assets/krnl0-logo-128.png">
+<meta name="theme-color" content="#121110">
+<meta name="color-scheme" content="dark light">
+<meta name="author" content="theMindDeveloper">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theminddev.com/krnl0/">
+<link rel="canonical" href="https://theminddev.com/krnl0/">
+<meta property="og:site_name" content="KRNL0">
+<meta property="og:title" content="KRNL0 — your whole day on one canvas">
+<meta property="og:description" content="Timer, to-dos, habits, calendar and clock on one canvas, working together. Free, no account, and your plans stay on your computer.">
+<meta property="og:image" content="https://theminddev.com/krnl0/assets/og-3.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="KRNL0: plan the day, watch it happen. Timer, to-dos, habits, calendar, clock, radio and analytics on one canvas">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KRNL0 — your whole day on one canvas">
+<meta name="twitter:description" content="Timer, to-dos, habits, calendar and clock on one canvas. Free, no account, private.">
+<meta name="twitter:image" content="https://theminddev.com/krnl0/assets/og-3.jpg">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; frame-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="apple-touch-icon" href="assets/krnl0-logo-180.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet"><!-- taste-skill-ignore: KRNL0 brand face -->
+<link rel="preload" href="hero.js?v=7a772f3087" as="script">
+<link rel="stylesheet" href="styles.css?v=db41e794af">
+<link rel="stylesheet" href="scenes/stage.css?v=71bd4619c7">
+<link rel="stylesheet" href="scenes/fly.css?v=d679719312">
+<link rel="stylesheet" href="scenes/sections.css?v=aebad80e66">
+<script>document.documentElement.classList.add('js')</script>
+<script>/* the site always opens at its first screen: a section link clicked earlier leaves #try (or another section) in the address, and reopening it would start there. Only a link from the download page may open a section. */(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual';var h=location.hash,ok=false;try{ok=h&&sessionStorage.getItem('krnl-jump')===h;sessionStorage.removeItem('krnl-jump')}catch(e){}if(h&&!ok)history.replaceState(null,'',location.pathname+location.search);if(!ok){var top=function(){if(!window.__krnlMoved)scrollTo(0,0)};var moved=function(){window.__krnlMoved=true};['wheel','touchstart','keydown','pointerdown'].forEach(function(t){addEventListener(t,moved,{once:true,passive:true})});addEventListener('DOMContentLoaded',top);addEventListener('load',top)}addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(a)setTimeout(function(){if(location.hash)history.replaceState(null,'',location.pathname+location.search)},0)});}catch(e){}})();</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"KRNL0","applicationCategory":"ProductivityApplication","operatingSystem":"Windows, macOS, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"Timer, to-dos, habits, calendar and clock on one canvas, working together. Free, no account, and your plans stay on your computer.","author":{"@type":"Person","name":"theMindDeveloper","url":"https://github.com/theMindDeveloper"},"downloadUrl":"https://github.com/theMindDeveloper/krnl0/releases/latest","softwareVersion":"0.10.1"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topnav">
+  <a class="brand" href="#title" aria-label="KRNL0, back to the top"><img src="assets/krnl0-logo-128.png" width="28" height="28" alt=""><span class="brand-mark" aria-hidden="true"><i>K</i><i>R</i><i>N</i><i>L</i><i>0</i></span></a>
+  <nav aria-label="Main">
+    <a href="#try">Overview</a>
+    <a href="#tour">Tour</a>
+    <a href="#inside">Features</a>
+    <a href="#replaces">One app</a>
+    <a href="#new">New</a>
+    <a href="#faq">Questions</a>
+  </nav>
+  <a class="btn btn-sm btn-gh" href="https://github.com/theMindDeveloper" aria-label="theMindDeveloper on GitHub"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a>
+  <a class="btn btn-sm" href="download.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4 18v2h16v-2"/></svg><span class="btn-t">Download</span></a>
+</header>
+
+<main id="main">
+
+<!-- ═══ HERO: the kernel and its nodes, as a line world ═══ -->
+<section class="hero" aria-labelledby="title">
+  <div class="tile h-stage" id="cube-tile">
+    <canvas id="cube" aria-label="The KRNL0 cube with Pomodoro, Todos, Habits and Terminal nodes wired to it. Point at a node or the cube; drag the cube to spin it." role="img"></canvas>
+    <div class="h-copy">
+      <p class="h-eyebrow">Seven apps, one canvas</p>
+      <h1 id="title"><span class="h1-a">Plan</span> the day.<br>Watch it <em class="h-hl">happen.</em></h1>
+      <p class="h-lead h-apps"><span class="aw-timer">timer</span><span class="aw-todo">to-dos</span><span class="aw-habit">habits</span><span class="aw-cal">calendar</span><span class="aw-clock">clock</span><span class="aw-radio">radio</span><span class="aw-stats">analytics</span></p>
+      <div class="h-actions">
+        <a class="btn btn-ink" data-dl href="https://github.com/theMindDeveloper/krnl0/releases/latest"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4 18v2h16v-2"/></svg><span class="btn-t">Download for Windows</span></a>
+        <a class="btn btn-line h-see" href="#try"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z"/></svg><span class="btn-t">See it in action</span></a>
+      </div>
+      <p class="h-meta">Free · no account · <a href="download.html">Mac or Linux: install guide</a></p>
+      <div class="h-today" aria-label="Today, as KRNL0 sees it: a planned day with the current time moving across it">
+        <div class="ht-head"><span>Today</span><span class="ht-right"><span class="ht-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M3 12h18"/></svg>drag the blocks</span><span class="ht-now" aria-live="off">--:--</span></span></div>
+        <div class="ht-track">
+          <div class="ht-goo">
+            <button type="button" class="ht-b b-run" style="--s:7;--e:7.5" aria-label="Morning run, 07:00 to 07:30. Drag it along the day, or use the arrow keys."><span class="ht-n" aria-hidden="true">Run</span></button>
+            <button type="button" class="ht-b b-lec" style="--s:10;--e:11.5" aria-label="Linear algebra lecture, 10:00 to 11:30. Drag it along the day, or use the arrow keys."><span class="ht-n" aria-hidden="true">Lecture</span></button>
+            <button type="button" class="ht-b b-out" style="--s:14;--e:14.83" aria-label="Outline chapter 3, 14:00 to 14:50. Drag it along the day, or use the arrow keys."><span class="ht-n" aria-hidden="true">Outline</span></button>
+            <button type="button" class="ht-b b-dr" style="--s:14.83;--e:15.66" aria-label="Drafts, 14:50 to 15:40. Drag it along the day, or use the arrow keys."><span class="ht-n" aria-hidden="true">Drafts</span></button>
+            <button type="button" class="ht-b b-gym" style="--s:17.5;--e:18.5" aria-label="Gym, 17:30 to 18:30. Drag it along the day, or use the arrow keys."><span class="ht-n" aria-hidden="true">Gym</span></button>
+            <button type="button" class="ht-b b-read" style="--s:21.5;--e:22" aria-label="Read 20 pages, 21:30 to 22:00. Drag it along the day, or use the arrow keys."><span class="ht-n" aria-hidden="true">Read</span></button>
+          </div>
+          <b class="ht-needle" aria-hidden="true"></b>
+        </div>
+        <div class="ht-scale" aria-hidden="true"><span>06</span><span>10</span><span>14</span><span>18</span><span>22</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="h-strip">
+    <a href="download.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M4 19.5h16"/></svg><b>Free, no account</b><span>Download, open it, and today is planned.</span></a>
+    <a href="#faq"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>Stays on your computer</b><span>No cloud, no tracking, no sign-up.</span></a>
+    <a href="#parts-live"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><b>Everything adds up</b><span>Every app counts into the same analytics.</span></a>
+  </div>
+</section>
+
+<!-- ═══ TRY: the live board ═══ -->
+<p class="sect-bar" aria-hidden="true">At a glance</p>
+<section class="sect glance" id="try" aria-labelledby="try-h">
+  <div class="gl-head">
+    <h2 id="try-h">Your day, at a glance.</h2>
+    <p>One screen holds the whole day. Point at a part of the tray and see where it lives in the real app.</p>
+  </div>
+  <div class="gl-body">
+    <div class="gl-fig">
+      <div class="gl-stage" id="gl-stage"></div>
+      <p class="gl-read" aria-live="polite"><b id="gl-name">Timer</b><span id="gl-say">It records what you are doing, minute by minute.</span></p>
+      <ul class="gl-meta"><li>Windows installer · v0.10.1</li><li>macOS and Linux: build from the source</li></ul>
+    </div>
+    <figure class="gl-shot" data-part="timer">
+      <img src="assets/stills/display.webp" width="2880" height="1620" loading="lazy" decoding="async" alt="KRNL0 in Station mode: the timer recording Outline chapter 3, to-dos, habits, the week calendar and the day clock, with a chain of three tasks, the theminddev.com website and a YouTube video on the canvas">
+      <i class="gl-spot" aria-hidden="true"></i>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══ TOUR: a camera flies through the real parts of the app; each is the live node, with its words beside it ═══ -->
+<p class="sect-bar" aria-hidden="true">Tour</p>
+<section class="sect scene fly" id="tour" data-scene="fly" data-options='{"hold":3}' aria-labelledby="fly-h">
+  <div class="scene-stage">
+    <h2 id="fly-h" class="fly-title">A tour of one canvas</h2>
+    <div class="fly-world">
+      <article class="fp" style="--x:0vw;--y:0vh;--z:0px;--ry:-4deg;--w:627px;--h:305px" data-kind="pomo">
+        <span class="fp-n" aria-hidden="true">01</span>
+        <div class="fp-node"><iframe tabindex="-1" data-src="app/index.html?solo=pomo&amp;bare=1" title="The real timer, in Observe mode" loading="lazy"></iframe></div>
+        <div class="fp-text"><p class="fp-k">Timer</p><h3>A timer that just watches.</h3><p>Observe mode simply records what you are doing. Press start, name it, and the minutes land on that task. Switch to Pomodoro for the 25-minute rhythm.</p></div>
+      </article>
+      <article class="fp" style="--x:0vw;--y:0vh;--z:-1100px;--ry:7deg;--w:627px;--h:370px" data-kind="todo">
+        <span class="fp-n" aria-hidden="true">02</span>
+        <div class="fp-node"><iframe tabindex="-1" data-src="app/index.html?solo=todo&amp;bare=1" title="The real to-do list" loading="lazy"></iframe></div>
+        <div class="fp-text"><p class="fp-k">To-dos</p><h3>A list with time on every line.</h3><p>Each to-do carries its estimate and a tag. Check it off, and the time you actually spent stays with it.</p></div>
+      </article>
+      <article class="fp" style="--x:0vw;--y:0vh;--z:-2200px;--ry:-7deg;--w:627px;--h:336px" data-kind="habit">
+        <span class="fp-n" aria-hidden="true">03</span>
+        <div class="fp-node"><iframe tabindex="-1" data-src="app/index.html?solo=habit&amp;bare=1" title="The real habit tracker" loading="lazy"></iframe></div>
+        <div class="fp-text"><p class="fp-k">Habits</p><h3>Habits you can see building.</h3><p>Morning run, reading, water. One tap a day and the week fills in; the streak counts itself.</p></div>
+      </article>
+      <article class="fp" style="--x:0vw;--y:0vh;--z:-3300px;--ry:6deg;--w:806px;--h:560px" data-kind="calendar">
+        <span class="fp-n" aria-hidden="true">04</span>
+        <div class="fp-node"><iframe tabindex="-1" data-src="app/index.html?solo=calendar&amp;bare=1" title="The real calendar" loading="lazy"></iframe></div>
+        <div class="fp-text"><p class="fp-k">Calendar</p><h3>Place one task. The rest follow.</h3><p>Tasks chain together, so dropping the first one on Thursday lines the whole afternoon up behind it.</p></div>
+      </article>
+      <article class="fp" style="--x:0vw;--y:0vh;--z:-4400px;--ry:0deg;--w:493px;--h:650px" data-kind="clock">
+        <span class="fp-n" aria-hidden="true">05</span>
+        <div class="fp-node"><iframe tabindex="-1" data-src="app/index.html?solo=clock&amp;bare=1" title="The real day clock" loading="lazy"></iframe></div>
+        <div class="fp-text"><p class="fp-k">Clock</p><h3>Your day, drawn on a dial.</h3><p>Plans, focus time and breaks around a real clock face, with what comes next listed underneath.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INTRO: statement tiles ═══ -->
+<p class="sect-bar" aria-hidden="true">Overview</p>
+<section class="sect intro board" aria-labelledby="intro-h">
+  <div class="tile i-a reveal">
+    <video class="i-film" data-autoplay muted loop playsinline preload="none" poster="assets/video/studio-display.jpg" aria-label="A silver studio display on a concrete table in a dark room, running KRNL0 in Station mode: the timer, to-dos, habits, calendar and clock, with a chain of three tasks, the theminddev.com website and a YouTube video on the canvas. The camera slowly moves in."><source src="assets/video/studio-display.webm" type="video/webm"><source src="assets/video/studio-display.mp4" type="video/mp4"></video>
+    <h2 id="intro-h">Seven apps.<br>One canvas.</h2>
+  </div>
+  <div class="tile i-b reveal"><p class="i-word">no<br>sign‑up</p></div>
+  <div class="tile i-c i-node reveal"><iframe tabindex="-1" data-src="app/index.html?solo=habit&amp;bare=1" title="The real habit tracker" loading="lazy"></iframe></div>
+  <div class="tile i-d">
+    <p class="reveal">Your timer, your list, your habits and your calendar usually live in four apps that never talk. <b>In KRNL0 they share one canvas</b>: start the timer and the minutes go to the task, tick a habit and the week fills in, move a task and the rest of the day follows.</p>
+  </div>
+</section>
+
+<!-- ═══ INSIDE: more of the app, each part live ═══ -->
+<p class="sect-bar" aria-hidden="true">Features</p>
+<section class="sect inside" id="inside" aria-labelledby="inside-h">
+  <h2 id="inside-h" class="sec-h">What's inside</h2>
+
+  <article class="sound tile" data-ui>
+    <div class="sound-words" aria-hidden="true">
+      <p data-par="-140">Rain · Fire · Synth ·</p>
+      <p data-par="110" class="o">White noise · Brown noise ·</p>
+      <p data-par="-80">Your own YouTube ·</p>
+    </div>
+    <div class="sound-copy">
+      <h3>Sound for focus.</h3>
+      <p>Pick rain, fire, synth or noise, or paste any YouTube link for your own music. In the app you can layer several at once. Keep favourites one tap away. The player floats over your day and tucks into the edge when you are done.</p>
+    </div>
+    <div class="sound-radio" data-par-y="-70">
+      <iframe data-src="app/index.html?solo=radio&amp;fit=1" title="The real Ambient Radio. Pick a sound and press play." loading="lazy" allow="autoplay; encrypted-media"></iframe>
+      <p class="sound-hint">The real Ambient Radio. Pick a sound, press play.</p>
+    </div>
+  </article>
+
+  <article class="fband fband-rust">
+    <div class="tile fband-copy">
+      <h3>Bring it in. Draw on it.</h3>
+      <ul>
+        <li>Images, PDFs, web pages and YouTube videos drop straight onto the canvas</li>
+        <li>Sticky notes, shapes and frames to group your thinking</li>
+        <li>A pen for drawing and highlighting, right over your plan</li>
+        <li>Your own whiteboard, sitting next to your calendar</li>
+      </ul>
+    </div>
+    <figure class="tile fband-media fband-shot">
+      <img class="still" src="assets/stills/display.webp" width="2880" height="1620" loading="lazy" decoding="async" alt="KRNL0 in Station mode: the timer recording Outline chapter 3, to-dos, habits, the week calendar and the day clock, with a chain of three tasks, the theminddev.com website and a YouTube video on the canvas">
+    </figure>
+  </article>
+
+  <article class="fband fband-violet fband-flip" id="ask">
+    <div class="tile fband-copy">
+      <h3>Ask Claude, in plain words.</h3>
+      <ul>
+        <li>Open the terminal window and type claude</li>
+        <li>Say what you want: “move the gym after my thesis block”</li>
+        <li>It moves tasks and books time with the app's own controls, while you watch</li>
+        <li>Optional, with your own Claude plan. Everything else works without it</li>
+      </ul>
+    </div>
+    <div class="tile fband-media fband-term" data-ui>
+      <div class="term-view app-view"><iframe data-src="app/index.html?solo=term" title="The real KRNL0 terminal, replaying a Claude session" loading="lazy"></iframe></div>
+    </div>
+  </article>
+</section>
+
+<!-- ═══ FEATURES: close-ups on a board ═══ -->
+
+
+<!-- ═══ PARTS: word cards; a click flips one over to the real node, at the card's own size ═══ -->
+<p class="sect-bar" aria-hidden="true">Parts</p>
+<section class="sect nodes" id="parts-live" aria-labelledby="nodes-h">
+  <div class="grid4">
+    <div class="cell c1"><h2 id="nodes-h" class="cw">Parts</h2><p class="cc">tap a card to open it</p></div>
+    <button class="cell flip c2" type="button" data-solo="pomo" aria-label="Open the real timer"><span class="face front"><span class="cw">timer</span><span class="cc">focus, recorded</span></span><span class="face back"></span></button>
+    <figure class="cell photo"><video class="loop" data-autoplay muted loop playsinline preload="none" poster="assets/blender/cube-line-poster.jpg" aria-label="The KRNL0 cube rendered in Blender as a line drawing, its layers twisting"><source src="assets/blender/cube-line.mp4" type="video/mp4"></video></figure>
+    <button class="cell flip c3" type="button" data-solo="todo" aria-label="Open the real to-do list"><span class="face front"><span class="cw">to-do</span><span class="cc">tagged list</span></span><span class="face back"></span></button>
+    <button class="cell flip c4" type="button" data-solo="habit" aria-label="Open the real habit tracker"><span class="face front"><span class="cw">habit</span><span class="cc">streaks</span></span><span class="face back"></span></button>
+    <button class="cell flip c1" type="button" data-solo="calendar" aria-label="Open the real calendar"><span class="face front"><span class="cw">cal</span><span class="cc">day to year</span></span><span class="face back"></span></button>
+    <button class="cell flip c2" type="button" data-solo="clock" aria-label="Open the real day clock"><span class="face front"><span class="cw">clock</span><span class="cc">day dial</span></span><span class="face back"></span></button>
+    <button class="cell flip c3" type="button" data-solo="radio" aria-label="Open the real Ambient Radio"><span class="face front"><span class="cw">radio</span><span class="cc">focus sounds</span></span><span class="face back"></span></button>
+    <button class="cell flip c4" type="button" data-solo="analytics" aria-label="Open the real analytics"><span class="face front"><span class="cw">stats</span><span class="cc">where time went</span></span><span class="face back"></span></button>
+    <button class="cell flip c1" type="button" data-solo="term" aria-label="Open the real terminal with Claude"><span class="face front"><span class="cw">claude</span><span class="cc">ask in words</span></span><span class="face back"></span></button>
+    <figure class="cell photo"><video class="loop" data-autoplay muted loop playsinline preload="none" poster="assets/blender/cube-solid-poster.jpg" aria-label="The KRNL0 cube rendered in Blender, dark with acid centres, its layers twisting"><source src="assets/blender/cube-solid.mp4" type="video/mp4"></video></figure>
+    <a class="cell c2 to-try" href="#try"><span class="cw">all</span><span class="cc">see them together ↑</span></a>
+  </div>
+</section>
+
+<!-- ═══ REPLACES: one app instead of nine, as cards ═══ -->
+<p class="sect-bar" aria-hidden="true">Replaces</p>
+<section class="sect swap" id="replaces" aria-labelledby="rep-h">
+  <div class="swap-cols">
+    <div class="swap-left">
+      <h2 id="rep-h" class="sec-h">One app instead of nine</h2>
+      <p class="sec-lead">Everything you juggled in separate tabs, in one place that knows how they fit together. Scroll, and watch them fold in.</p>
+      <ol class="was">
+        <li data-k="0"><s>Forest</s><span>focus timer</span></li>
+        <li data-k="1"><s>Todoist</s><span>to-dos</span></li>
+        <li data-k="2"><s>Streaks</s><span>habits</span></li>
+        <li data-k="3"><s>Google Calendar</s><span>calendar</span></li>
+        <li data-k="4"><s>Notion</s><span>projects</span></li>
+        <li data-k="5"><s>Toggl</s><span>time tracking</span></li>
+        <li data-k="6"><s>Miro</s><span>whiteboard</span></li>
+        <li data-k="7"><s>Noisli</s><span>focus sounds</span></li>
+        <li data-k="8"><s>a chat tab</s><span>assistant</span></li>
+      </ol>
+    </div>
+    <div class="swap-right">
+      <div class="one" data-ui>
+        <p class="one-name"><img src="assets/krnl0-logo-128.png" width="40" height="40" alt="">KRNL0</p>
+        <ul class="one-parts">
+          <li data-k="0"><i style="--c:var(--acid)"></i>Timer<b>records what you do</b></li>
+          <li data-k="1"><i style="--c:var(--cream)"></i>To-dos<b>time on every line</b></li>
+          <li data-k="2"><i style="--c:var(--cyan)"></i>Habits<b>streaks that count themselves</b></li>
+          <li data-k="3"><i style="--c:var(--rust)"></i>Calendar<b>plans, habits and focus together</b></li>
+          <li data-k="4"><i style="--c:var(--purple)"></i>Chains<b>place one, the rest follow</b></li>
+          <li data-k="5"><i style="--c:#d9cfb8"></i>Analytics<b>planned against actual</b></li>
+          <li data-k="6"><i style="--c:var(--acid)"></i>Canvas<b>notes, images, videos, pen</b></li>
+          <li data-k="7"><i style="--c:var(--cyan)"></i>Ambient Radio<b>rain, fire, any YouTube link</b></li>
+          <li data-k="8"><i style="--c:var(--purple)"></i>Claude<b>ask in plain words</b></li>
+        </ul>
+        <p class="one-foot"><span class="one-n">0</span> of 9 in one place · free · on your computer</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ A DAY: the live thing — drag the first task, the chain follows ═══ -->
+<p class="sect-bar" aria-hidden="true">A day</p>
+<section class="sect day" id="day" aria-labelledby="day-h">
+  <div class="day-head">
+    <h2 id="day-h" class="sec-h">Move one. The rest follow.</h2>
+    <p class="sec-lead">This is how a chain works in KRNL0. Drag the first task along your day, or tap it and use the arrow keys. The next two line up behind it.</p>
+  </div>
+  <div class="plan" data-ui>
+    <div class="plan-top"><span>Thursday</span><span class="plan-out" aria-live="polite">Done by 15:45</span></div>
+    <div class="plan-day">
+      <div class="plan-fixed" style="--s:16.5;--e:17"><b>Call</b></div>
+      <div class="plan-fixed" style="--s:12;--e:12.75"><b>Lunch</b></div>
+      <div class="plan-fixed" style="--s:18;--e:19"><b>Gym</b></div>
+      <div class="plan-chain">
+        <button type="button" class="pc pc-0" aria-label="Outline chapter 3, 50 minutes. Use the arrow keys to move it.">Outline ch. 3<small>50 min</small></button>
+        <span class="pc-w" aria-hidden="true"></span>
+        <div class="pc pc-1">Draft<small>25 min</small></div>
+        <span class="pc-w" aria-hidden="true"></span>
+        <div class="pc pc-2">Review<small>30 min</small></div>
+      </div>
+      <b class="plan-now" aria-hidden="true"></b>
+    </div>
+    <div class="plan-scale" aria-hidden="true"><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span></div>
+    <p class="plan-warn" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ═══ NEW: what v0.10 adds, from docs/releases/v0.10.0.md and v0.10.1.md ═══ -->
+<p class="sect-bar" aria-hidden="true">New in v0.10</p>
+<section class="sect news" id="new" aria-labelledby="new-h">
+  <div class="news-head">
+    <h2 id="new-h" class="sec-h">New in v0.10</h2>
+    <p class="sec-lead">The biggest update yet: a new look, an analytics window, task tags, a pen, and anything you drop on the canvas.</p>
+  </div>
+  <ul class="news-list">
+    <li><b>Updates arrive by themselves</b><span>New in 0.10.1: a new version downloads quietly in the background. Restart when it suits you, or it installs the next time you close KRNL0.</span></li>
+    <li><b>Analytics window</b><span>Eight pages, from a plain-language summary to time by tag, your best hours and habits. Nothing scrolls.</span></li>
+    <li><b>Task tags</b><span>Every task is tagged for you: Study, Writing, Health, Chores and more. Rename one and the tagger learns.</span></li>
+    <li><b>Done and Archive</b><span>Finished tasks move to Done, then to an Archive grouped by day. Nothing is deleted.</span></li>
+    <li><b>Habits that repeat</b><span>Every day, weekdays or days you pick, with a time and a length. They show on the calendar.</span></li>
+    <li><b>Pen and stickies</b><span>Pen, marker, highlighter, arrow and eraser in eight colours, plus paper sticky notes and shapes.</span></li>
+    <li><b>Drop anything</b><span>Videos you can seek, PDFs that turn pages, audio, YouTube, Vimeo, SoundCloud and websites.</span></li>
+    <li><b>Year view and Big Clock</b><span>The calendar gains a year view; the clock gains a big mode and a larger dial.</span></li>
+    <li><b>A movable dock</b><span>Drag the toolbar to the top, middle or bottom of the left edge, or to the bottom centre.</span></li>
+  </ul>
+  <p class="news-more"><a href="https://github.com/theMindDeveloper/krnl0/blob/main/docs/releases/v0.10.0.md">All the release notes</a></p>
+</section>
+
+<!-- ═══ FAQ: question index ═══ -->
+<p class="sect-bar" aria-hidden="true">Questions</p>
+<section class="sect faq" id="faq" aria-labelledby="faq-h">
+  <div class="q-list">
+    <h2 id="faq-h" class="q-head">Fair questions</h2>
+    <button class="q on" type="button" aria-controls="a-pane" data-a="Yes. KRNL0 costs nothing: no subscription, no trial, no account. The code is public, so anyone can see how it works, and every release becomes fully open source two years after it ships.">Is it free?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="No. Everything is saved in one file on your own computer. No account, no tracking, no cloud. Close it, open it next week, and your day is exactly where you left it.">Does it need the internet?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="Windows has an installer today (v0.10.1), and from then on KRNL0 updates itself. On macOS and Linux you can build it yourself from the source code on GitHub.">Which computers does it run on?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="No. Every part works on its own. If you use Claude, you can open the terminal window and ask it to plan or move things for you, with your own Claude plan.">Do I need AI?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="Yes. Pick a frame style (Paper, Pro, Nuclear, Blueprint, Macintosh and more) and switch between light and dark whenever you like.">Can I change how it looks?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="Your whole board is one file, board.json, in Documents/krnl0 on your computer. Copy it to back it up, or move it to another computer.">Where is my data?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="They move to a Done list, then to an Archive grouped by day. Nothing is deleted, and the time you spent stays in your analytics.">What happens to finished tasks?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="No. It started as a university project, and it is for anyone who wants their day in one place: work, study, training, chores, all of it.">Is it only for students?</button>
+  </div>
+  <div class="a-pane" id="a-pane" aria-live="polite">
+    <p id="a-text">Yes. KRNL0 costs nothing: no subscription, no trial, no account. The code is public, so anyone can see how it works, and every release becomes fully open source two years after it ships.</p>
+  </div>
+</section>
+
+<!-- ═══ CTA: the action tile ═══ -->
+<p class="sect-bar" aria-hidden="true">Download</p>
+<section class="sect cta" aria-labelledby="cta-h">
+  <figure class="tile cta-l photo"><img src="assets/blender/cube-line-poster.jpg" width="1080" height="1080" loading="lazy" alt=""></figure>
+  <div class="tile cta-c reveal">
+    <h2 id="cta-h">Your whole day, one canvas.</h2>
+    <p class="dl-note">Free for Windows. Download it, open it, and today is planned in a minute.</p>
+    <ol class="cta-steps">
+      <li><b>1</b>Download the installer</li>
+      <li><b>2</b>Open KRNL0</li>
+      <li><b>3</b>Drop your first task on today</li>
+    </ol>
+    <div class="cta-actions">
+      <a class="btn" data-dl href="https://github.com/theMindDeveloper/krnl0/releases/latest"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4 18v2h16v-2"/></svg><span class="btn-t">Download for Windows</span></a>
+      <a class="btn btn-ghost" href="#tour"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg><span class="btn-t">Take the tour</span></a>
+      <a class="btn btn-ghost" href="https://github.com/theMindDeveloper/krnl0"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg><span class="btn-t">Source on GitHub</span></a>
+    </div>
+  </div>
+  <div class="tile cta-r"><b>v0.10.1</b><span>Windows installer, updates itself</span></div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER: the mark built large ═══ -->
+<footer class="foot" aria-labelledby="foot-h">
+  <h2 id="foot-h" class="blocks" aria-label="KRNL0">
+    <span class="b b1"><small>keep focus</small>K</span><span class="b b2"><small>routines</small>R</span><span class="b b3"><small>now</small>N</span><span class="b b4"><small>local</small>L</span><span class="b b5"><small>zero cost</small>0</span>
+  </h2>
+  <div class="foot-cols">
+    <ul>
+      <li><a href="#try">Overview</a></li>
+      <li><a href="#tour">Tour</a></li>
+      <li><a href="#inside">Features</a></li>
+      <li><a href="#replaces">One app</a></li>
+      <li><a href="#day">A day</a></li>
+      <li><a href="#faq">Questions</a></li>
+    </ul>
+    <ul>
+      <li><a href="download.html">Download and install</a></li>
+      <li><a href="https://github.com/theMindDeveloper/krnl0">Source on GitHub</a></li>
+      <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/CHANGELOG.md">Changelog</a></li>
+      <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/LICENSE.md">Licence</a></li>
+    </ul>
+    <p class="foot-note">Built by theMindDeveloper. Free and open source.</p>
+  </div>
+  <div class="foot-last">
+    <p>© 2026 KRNL0 · <a class="foot-gh" href="https://github.com/theMindDeveloper"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg>theminddev</a></p>
+    <a class="btn btn-small" href="#title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5"/></svg><span class="btn-t">Back to the top</span></a>
+  </div>
+</footer>
+
+<script src="vendor/gsap.min.js?v=9396f25632"></script>
+<script src="vendor/ScrollTrigger.min.js?v=05ca5ad88c"></script>
+<script src="scenes/stage.js?v=8049453f41"></script>
+<script src="scenes/fly.js?v=6b0221c009"></script>
+<script src="scenes/hairline/kernel.js?v=0c641a7916"></script>
+<script src="scenes/sea.js?v=b4f44e10cc"></script>
+<script src="scenes/glance.js?v=0c00555838"></script>
+<script src="scenes/hairline/station.js?v=2f410f270c"></script>
+<script>Stage.init();</script>
+<script src="hero.js?v=7a772f3087" defer></script>
+<script src="app.js?v=9540ed1028" defer></script>
+<script src="scenes/sections.js?v=ee530e4312" defer></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* KRNL0 scene: fly. Finished composition first (no script, reduced motion), then live.
+   A panel is the live node, at its own size and shape with nothing behind it, and its words to the right. */
+.fly { --gap-z: 800px; --k: 1.12; margin-top: 160px; padding: 0 var(--edge, 16px); }
+.fly .scene-stage { background: #0c0b09; border-radius: 14px; padding: 40px 28px; }
+.fly-title { font-size: clamp(40px, 5.4vw, 88px); line-height: 0.95; letter-spacing: -0.04em; font-weight: 800; color: #f4efe2; max-width: 14ch; margin-bottom: 40px; }
+.fly-world { display: flex; flex-direction: column; gap: 56px; }
+.fp { margin: 0; display: flex; align-items: center; gap: 44px; color: #f4efe2; }
+.fp-node { flex: none; width: var(--w); height: var(--h); position: relative; }
+.fp-node iframe, .fp-node .embed-still { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: transparent; color-scheme: normal; }
+.fp-text { flex: 0 1 380px; display: flex; flex-direction: column; gap: 14px; }
+.fp-k { font-size: 17px; font-weight: 700; color: #c9f158; }
+.fp-text h3 { font-size: clamp(30px, 2.8vw, 46px); line-height: 1; letter-spacing: -0.04em; font-weight: 800; text-wrap: balance; }
+.fp-text p:last-child { font-size: 18px; line-height: 1.5; color: #e4ddcc; max-width: 32ch; }
+
+/* live: a held stage with depth */
+html.js .fly.is-live { padding: 0; margin-top: 0; }
+html.js .fly.is-live .scene-stage { border-radius: 0; padding: 0; perspective: 1300px; perspective-origin: 50% 48%; }
+html.js .fly.is-live .fly-title { position: absolute; left: clamp(20px, 4vw, 56px); top: clamp(80px, 12vh, 140px); z-index: 3; margin: 0; }
+html.js .fly.is-live .fly-world { position: absolute; left: 50%; top: 50%; width: 0; height: 0; display: block; transform-style: preserve-3d; }
+html.js .fly.is-live .fp {
+  position: absolute; left: 0; top: 0; width: max-content;
+  transform: translate(-50%, -50%) translate3d(calc(var(--x) * var(--k)), calc(var(--y) * var(--k)), var(--z)) rotateY(var(--ry, 0deg)) scale(var(--k));
+  backface-visibility: hidden;
+}
+
+@media (max-width: 900px) {
+  .fly { --k: 0.6; --gap-z: 420px; }
+  .fp { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .fp[data-kind="calendar"] { --w: 600px !important; --h: 440px !important; }
+  .fp-text { flex-basis: auto; width: var(--w); }
+  .fp-k { font-size: 26px; }
+  .fp-text h3 { font-size: 50px; }
+  .fp-text p:last-child { font-size: 24px; max-width: none; }
+  html:not(.js) .fly-world, .fly:not(.is-live) .fly-world { zoom: var(--k); }
+  html.js .fly.is-live .scene-stage { perspective: 900px; }
+}
+@media (max-width: 640px) { .fly { --k: 0.64; } .fly-title { font-size: 34px; } }
+/* cinematic: a soft light on the stage, the dark falls off at the edges */
+/* cinematic: a dark stage, a floor of dots that rushes past, a chapter number standing behind each part */
+html.js .fly.is-live .scene-stage { background: #090807; }
+.fly-floor { display: none; }
+html.js .fly.is-live .fly-floor {
+  display: block; position: absolute; left: -3000px; top: 0; width: 6000px; height: 16000px; pointer-events: none;
+  transform-origin: 50% 0; transform: translate3d(0, 44vh, 900px) rotateX(-90deg);
+  background-image: radial-gradient(circle, rgba(244, 239, 226, 0.5) 1.6px, transparent 2px); background-size: 90px 90px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 85%); mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 85%);
+}
+html.js .fly.is-live .fp { transform-style: preserve-3d; }
+.fp-n { display: none; }
+html.js .fly.is-live .fp-n {
+  display: block; position: absolute; left: -2%; bottom: 100%; transform: translate3d(0, 18%, -120px); pointer-events: none;
+  font-size: 220px; line-height: 0.8; font-weight: 800; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1.5px rgba(201, 241, 88, 0.45);
+}
+
+
+/* the Hairline sea behind the tour: KRNL0's palette on Hairline's classes */
+.sea { display: none; }
+html.js .fly.is-live .scene-stage { background: #0c0b09; }
+html.js .fly.is-live .sea {
+  display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 46%; pointer-events: none; z-index: 0;
+  --hairline-plate: #0c0b09; --hairline-lo: #2a2620; --hairline-mid: #3d372e; --hairline-edge: #6b6252; --hairline-hi: #c9f158; --hairline-stroke: 1.1;
+}
+.sea svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.sea path { fill: var(--hairline-plate); stroke: var(--hairline-mid); stroke-width: var(--hairline-stroke); vector-effect: non-scaling-stroke; stroke-linejoin: round; transition: stroke 260ms cubic-bezier(.32,.72,0,1); }
+.sea path.lo { stroke: var(--hairline-lo); } .sea path.sil { stroke: var(--hairline-edge); } .sea path.hi { stroke: var(--hairline-hi); }
+html.js .fly.is-live .fly-world, html.js .fly.is-live .fly-title { z-index: 2; }
+html.js .fly.is-live .fp-n { -webkit-text-stroke-color: rgba(201, 241, 88, 0.45); }
+
+/* the tour is a showcase: the parts drift gently and run on their own, but cannot be clicked */
+.fp-node iframe { pointer-events: none; }
+.fp-node { user-select: none; }
+html.js .fly.is-live .fp-node { animation: fp-drift 7s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -1.6s); will-change: transform; }
+.fp:nth-child(2) { --i: 1; } .fp:nth-child(3) { --i: 2; } .fp:nth-child(4) { --i: 3; } .fp:nth-child(5) { --i: 4; } .fp:nth-child(6) { --i: 5; }
+@keyframes fp-drift {
+  0%   { transform: translate3d(0, -10px, 0) rotateZ(-0.6deg); }
+  50%  { transform: translate3d(6px, 4px, 0) rotateZ(0.3deg); }
+  100% { transform: translate3d(-4px, 10px, 0) rotateZ(0.7deg); }
+}
+@media (prefers-reduced-motion: reduce) { html.js .fly.is-live .fp-node { animation: none; } }
+/* sharp parts: the panels are laid out at their full size instead of being scaled up, so text renders 1:1 */
+@media (min-width: 901px) { .fly { --k: 1; } }
+html.js .fly.is-live .fp { -webkit-font-smoothing: antialiased; }
+html.js .fly.is-live .fp-n { color: #0c0b09; -webkit-text-stroke: 3px rgba(201, 241, 88, 0.45); paint-order: stroke fill; }
