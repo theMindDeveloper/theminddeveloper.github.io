@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="scenes/sections.css?v=aebad80e66">
 <script>document.documentElement.classList.add('js')</script>
 <script>/* the site always opens at its first screen: a section link clicked earlier leaves #try (or another section) in the address, and reopening it would start there. Only a link from the download page may open a section. */(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual';var h=location.hash,ok=false;try{ok=h&&sessionStorage.getItem('krnl-jump')===h;sessionStorage.removeItem('krnl-jump')}catch(e){}if(h&&!ok)history.replaceState(null,'',location.pathname+location.search);if(!ok){var top=function(){if(!window.__krnlMoved)scrollTo(0,0)};var moved=function(){window.__krnlMoved=true};['wheel','touchstart','keydown','pointerdown'].forEach(function(t){addEventListener(t,moved,{once:true,passive:true})});addEventListener('DOMContentLoaded',top);addEventListener('load',top)}addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(a)setTimeout(function(){if(location.hash)history.replaceState(null,'',location.pathname+location.search)},0)});}catch(e){}})();</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"KRNL0","applicationCategory":"ProductivityApplication","operatingSystem":"Windows, macOS, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"Timer, to-dos, habits, calendar and clock on one canvas, working together. Free, no account, and your plans stay on your computer.","author":{"@type":"Person","name":"theMindDeveloper","url":"https://github.com/theMindDeveloper"},"downloadUrl":"https://github.com/theMindDeveloper/krnl0/releases/latest","softwareVersion":"0.10.1"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"KRNL0","applicationCategory":"ProductivityApplication","operatingSystem":"Windows, macOS, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"Timer, to-dos, habits, calendar and clock on one canvas, working together. Free, no account, and your plans stay on your computer.","author":{"@type":"Person","name":"theMindDeveloper","url":"https://github.com/theMindDeveloper"},"downloadUrl":"https://github.com/theMindDeveloper/krnl0/releases/latest","softwareVersion":"0.11.2"}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -106,7 +106,7 @@
     <div class="gl-fig">
       <div class="gl-stage" id="gl-stage"></div>
       <p class="gl-read" aria-live="polite"><b id="gl-name">Timer</b><span id="gl-say">It records what you are doing, minute by minute.</span></p>
-      <ul class="gl-meta"><li>Windows installer · v0.10.1</li><li>macOS and Linux: build from the source</li></ul>
+      <ul class="gl-meta"><li>Windows installer · v<span data-krnl-v>0.11.2</span></li><li>macOS and Linux: build from the source</li></ul>
     </div>
     <figure class="gl-shot" data-part="timer">
       <img src="assets/stills/display.webp" width="2880" height="1620" loading="lazy" decoding="async" alt="KRNL0 in Station mode: the timer recording Outline chapter 3, to-dos, habits, the week calendar and the day clock, with a chain of three tasks, the theminddev.com website and a YouTube video on the canvas">
@@ -304,25 +304,25 @@
   </div>
 </section>
 
-<!-- ═══ NEW: what v0.10 adds, from docs/releases/v0.10.0.md and v0.10.1.md ═══ -->
-<p class="sect-bar" aria-hidden="true">New in v0.10</p>
+<!-- ═══ NEW: what v0.11 adds, from docs/releases/v0.11.0.md ═══ -->
+<p class="sect-bar" aria-hidden="true">New in v0.11</p>
 <section class="sect news" id="new" aria-labelledby="new-h">
   <div class="news-head">
-    <h2 id="new-h" class="sec-h">New in v0.10</h2>
-    <p class="sec-lead">The biggest update yet: a new look, an analytics window, task tags, a pen, and anything you drop on the canvas.</p>
+    <h2 id="new-h" class="sec-h">New in v0.11</h2>
+    <p class="sec-lead">Start simple and get shown around: an Easy mode, a guide that talks you through your first day, and plans, habits and events on one board.</p>
   </div>
   <ul class="news-list">
-    <li><b>Updates arrive by themselves</b><span>New in 0.10.1: a new version downloads quietly in the background. Restart when it suits you, or it installs the next time you close KRNL0.</span></li>
-    <li><b>Analytics window</b><span>Eight pages, from a plain-language summary to time by tag, your best hours and habits. Nothing scrolls.</span></li>
-    <li><b>Task tags</b><span>Every task is tagged for you: Study, Writing, Health, Chores and more. Rename one and the tagger learns.</span></li>
-    <li><b>Done and Archive</b><span>Finished tasks move to Done, then to an Archive grouped by day. Nothing is deleted.</span></li>
-    <li><b>Habits that repeat</b><span>Every day, weekdays or days you pick, with a time and a length. They show on the calendar.</span></li>
-    <li><b>Pen and stickies</b><span>Pen, marker, highlighter, arrow and eraser in eight colours, plus paper sticky notes and shapes.</span></li>
-    <li><b>Drop anything</b><span>Videos you can seek, PDFs that turn pages, audio, YouTube, Vimeo, SoundCloud and websites.</span></li>
-    <li><b>Year view and Big Clock</b><span>The calendar gains a year view; the clock gains a big mode and a larger dial.</span></li>
-    <li><b>A movable dock</b><span>Drag the toolbar to the top, middle or bottom of the left edge, or to the bottom centre.</span></li>
+    <li><b>Easy mode</b><span>Plan your day, record what you do, see how it went. Everything else is one switch away in Settings.</span></li>
+    <li><b>A guide that talks</b><span>Your first day, walked through out loud. Every window has its own short tour, too.</span></li>
+    <li><b>Plans with a When</b><span>A day and a time, or just a day. Plans for "any time that day" sit in their own strip on the calendar.</span></li>
+    <li><b>Repeating events</b><span>A class or a work shift sits on your calendar every week. Skip one, move one, end it after a day.</span></li>
+    <li><b>Habits on the board</b><span>Tick today from the board. Aim for 3 times a week, a daily goal like 8 glasses, and rest days that keep your streak.</span></li>
+    <li><b>A timer that floats</b><span>Minimise KRNL0 and a small timer stays above your other windows.</span></li>
+    <li><b>Welcome back</b><span>After a few days away, a short list of what slipped, with one-click fixes.</span></li>
+    <li><b>Close the day</b><span>In the evening, one card with what you did today.</span></li>
+    <li><b>Updates arrive by themselves</b><span>A new version downloads quietly in the background, and your board is backed up first.</span></li>
   </ul>
-  <p class="news-more"><a href="https://github.com/theMindDeveloper/krnl0/blob/main/docs/releases/v0.10.0.md">All the release notes</a></p>
+  <p class="news-more"><a href="https://github.com/theMindDeveloper/krnl0/releases/latest">All the release notes</a></p>
 </section>
 
 <!-- ═══ FAQ: question index ═══ -->
@@ -332,7 +332,7 @@
     <h2 id="faq-h" class="q-head">Fair questions</h2>
     <button class="q on" type="button" aria-controls="a-pane" data-a="Yes. KRNL0 costs nothing: no subscription, no trial, no account. The code is public, so anyone can see how it works, and every release becomes fully open source two years after it ships.">Is it free?</button>
     <button class="q" type="button" aria-controls="a-pane" data-a="No. Everything is saved in one file on your own computer. No account, no tracking, no cloud. Close it, open it next week, and your day is exactly where you left it.">Does it need the internet?</button>
-    <button class="q" type="button" aria-controls="a-pane" data-a="Windows has an installer today (v0.10.1), and from then on KRNL0 updates itself. On macOS and Linux you can build it yourself from the source code on GitHub.">Which computers does it run on?</button>
+    <button class="q" type="button" aria-controls="a-pane" data-a="Windows has an installer today, and from then on KRNL0 updates itself. On macOS and Linux you can build it yourself from the source code on GitHub.">Which computers does it run on?</button>
     <button class="q" type="button" aria-controls="a-pane" data-a="No. Every part works on its own. If you use Claude, you can open the terminal window and ask it to plan or move things for you, with your own Claude plan.">Do I need AI?</button>
     <button class="q" type="button" aria-controls="a-pane" data-a="Yes. Pick a frame style (Paper, Pro, Nuclear, Blueprint, Macintosh and more) and switch between light and dark whenever you like.">Can I change how it looks?</button>
     <button class="q" type="button" aria-controls="a-pane" data-a="Your whole board is one file, board.json, in Documents/krnl0 on your computer. Copy it to back it up, or move it to another computer.">Where is my data?</button>
@@ -362,7 +362,7 @@
       <a class="btn btn-ghost" href="https://github.com/theMindDeveloper/krnl0"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg><span class="btn-t">Source on GitHub</span></a>
     </div>
   </div>
-  <div class="tile cta-r"><b>v0.10.1</b><span>Windows installer, updates itself</span></div>
+  <div class="tile cta-r"><b>v<span data-krnl-v>0.11.2</span></b><span>Windows installer, updates itself</span></div>
 </section>
 
 </main>
@@ -406,6 +406,7 @@
 <script>Stage.init();</script>
 <script src="hero.js?v=7a772f3087" defer></script>
 <script src="app.js?v=9540ed1028" defer></script>
+<script>/* The version shown on this page is the newest published release, read from GitHub on every visit; the number written in the HTML is only the fallback. */(function(){try{fetch('https://api.github.com/repos/theMindDeveloper/krnl0/releases/latest',{headers:{Accept:'application/vnd.github+json'}}).then(function(r){return r.ok?r.json():null}).then(function(j){var v=j&&typeof j.tag_name==='string'?j.tag_name.replace(/^v/,''):'';if(!/^[0-9]+[.][0-9]+[.][0-9]+$/.test(v))return;document.querySelectorAll('[data-krnl-v]').forEach(function(e){e.textContent=v})}).catch(function(){})}catch(e){}})();</script>
 <script src="scenes/sections.js?v=ee530e4312" defer></script>
 </body>
 </html>
