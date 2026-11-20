@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KRNL0 Server — your board on your phone and every computer</title>
+<meta name="description" content="Run a small KRNL0 server at home. Your computers share one board, and your phone opens it in the browser. Set up in about ten minutes with Docker or one command.">
+<link rel="icon" href="assets/krnl0-logo-128.png">
+<meta name="theme-color" content="#121110">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KRNL0">
+<meta property="og:title" content="KRNL0 Server">
+<meta property="og:description" content="Your board on your phone and every computer, from a server in your home.">
+<meta property="og:image" content="https://theminddev.com/krnl0/assets/og-3.jpg">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; frame-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="apple-touch-icon" href="assets/krnl0-logo-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet"><!-- taste-skill-ignore: KRNL0 brand face -->
+<link rel="stylesheet" href="styles.css?v=236a582168">
+<link rel="stylesheet" href="download.css?v=99b8617691">
+<link rel="stylesheet" href="server.css?v=32f71331ba">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="dl-page sv-page">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topnav">
+  <a class="brand" href="index.html"><img src="assets/krnl0-logo-128.png" width="28" height="28" alt="">KRNL0</a>
+  <nav aria-label="Main">
+    <a href="index.html#try">Overview</a>
+    <a href="index.html#inside">Features</a>
+    <a href="#install">Install</a>
+    <a href="#phone">Phone</a>
+    <a href="#connect">Computers</a>
+  </nav>
+  <a class="btn btn-sm btn-gh" href="https://github.com/theMindDeveloper/krnl0-server" aria-label="KRNL0 server on GitHub"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a>
+  <a class="btn btn-sm" href="download.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4 18v2h16v-2"/></svg><span class="btn-t">Download</span></a>
+</header>
+
+<main id="main" class="dx sv">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-whale" viewBox="0 0 24 24"><path d="M2.5 11.5h16.2c.6-1.5 1.9-2.3 3.3-2.1-.2 1.4-.9 2.2-2 2.5-.9 4.5-4.6 7.3-9.6 7.3-4.2 0-7.2-2.6-7.9-7.7z" fill="currentColor"/><path d="M5 8h2.4v2.4H5zM8.2 8h2.4v2.4H8.2zM11.4 8h2.4v2.4h-2.4zM8.2 4.8h2.4v2.4H8.2zM11.4 4.8h2.4v2.4h-2.4zM14.6 8H17v2.4h-2.4z" fill="currentColor"/></symbol>
+  <symbol id="i-term" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 9.5l3 2.5-3 2.5M12 15h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ═══ THE IDEA: one board, three screens, one server at home ═══ -->
+<section class="dx-hero sv-hero" id="top" aria-labelledby="sv-h">
+  <div class="sv-hero-copy">
+    <p class="dx-chips"><span>Free</span><span>Runs in your home</span><span>Optional</span></p>
+    <h1 id="sv-h">One board.<br>Every <em>screen</em>.</h1>
+    <div class="sv-hero-row">
+      <p class="dx-lead">Run a small KRNL0 server at home. Your computers keep the same board, and your phone opens it in its browser. Nothing goes to anyone else's cloud.</p>
+      <div class="dx-cta">
+        <a class="dx-big" href="#install">
+          <svg class="dx-big-os" aria-hidden="true"><use href="#i-term"/></svg>
+          <span class="dx-big-t"><b>Set it up</b><small>About ten minutes, with Docker or one command</small></span>
+          <svg class="dx-big-dl sv-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="sv-stage">
+    <figure class="sv-dev sv-pc">
+      <span class="sv-pc-bar" aria-hidden="true"><i></i><i></i><i></i><span class="sv-url"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>192.168.1.20:8443</span></span>
+      <img src="assets/stills/srv-desktop.webp" width="1920" height="1200" alt="KRNL0 in a computer's browser: the Station with the timer, plans, calendar, clock, habits and insights, the badge saying saved and synced">
+    </figure>
+    <figure class="sv-dev sv-tab"><img src="assets/stills/srv-ipad.webp" width="1600" height="1112" alt="The same board on an iPad: Today with the timer, plans, the week's calendar and habits" loading="lazy"></figure>
+    <figure class="sv-dev sv-ph"><img src="assets/stills/srv-phone.webp" width="780" height="1688" alt="The same board on a phone: the timer running, today's plans, and the tabs Today, Calendar, Habits, Insights and Canvas" loading="lazy"></figure>
+  </div>
+  <p class="sv-cap">The same board in the same second, on every screen, from one server at home. Real screenshots.</p>
+</section>
+
+<!-- ═══ WHAT YOU NEED ═══ -->
+<section class="sv-need" aria-labelledby="need-h">
+  <div class="sv-need-head">
+    <h2 id="need-h" class="dx-kicker">What you need</h2>
+    <p>KRNL0 works the same without a server. The server only adds your other devices.</p>
+  </div>
+  <ul>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg><b>A computer that stays on</b><span>A Raspberry Pi, a NAS, a home server or an old laptop. 64-bit Linux, or anything that runs Docker.</span></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><b>KRNL0 0.13 or newer</b><span>On each computer you want in sync. The app updates itself, so you likely have it.</span></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5"/></svg><b>About ten minutes</b><span>Most of it is the download. You'll choose one password on the way.</span></li>
+  </ul>
+</section>
+
+<!-- ═══ 1 · INSTALL ═══ -->
+<section class="dx-os sv-step sv-s1" id="install" aria-labelledby="s1-h">
+  <header class="dx-os-head">
+    <span class="sv-n" aria-hidden="true">1</span>
+    <h2 id="s1-h">Install the server</h2>
+    <span class="sv-head-note">Pick one. Both give you the same server.</span>
+  </header>
+  <div class="sv-ways">
+    <article class="sv-way" id="docker" aria-labelledby="docker-h">
+      <div class="sv-way-head"><svg class="sv-way-i" aria-hidden="true"><use href="#i-whale"/></svg><div><h3 id="docker-h">With Docker</h3><p>A NAS, a home server, or Docker Desktop on Windows and Mac.</p></div></div>
+      <div class="sv-code">
+        <span class="dx-term-bar" aria-hidden="true"><i></i><i></i><i></i>terminal</span>
+<pre><code><em>$</em> docker run -d --name krnl0 --restart unless-stopped \
+    -p 8443:8443 -v krnl0-data:/data \
+    -e KRNL0_HOSTS=<mark>192.168.1.20</mark> -e TZ=<mark>Europe/Berlin</mark> \
+    ghcr.io/theminddeveloper/krnl0-server:latest
+<em>$</em> docker logs krnl0</code></pre>
+        <button class="sv-copy" type="button" data-copy="docker run -d --name krnl0 --restart unless-stopped -p 8443:8443 -v krnl0-data:/data -e KRNL0_HOSTS=192.168.1.20 -e TZ=Europe/Berlin ghcr.io/theminddeveloper/krnl0-server:latest"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button>
+      </div>
+      <ol class="dx-rail">
+        <li><b>Change the two marked parts.</b><span>Your server's address on your home network, and your <a class="sv-in" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">time zone</a>, so your days start at your midnight.</span></li>
+        <li><b>Run it, then read the log.</b><span><code>docker logs krnl0</code> shows the address to open and a one-time <b>setup code</b>. Keep it for step 2.</span></li>
+      </ol>
+      <p class="sv-alt">Prefer Docker Compose? Get <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/compose.yml">compose.yml</a> and <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/env.example">env.example</a> (save it as <code>.env</code>), then <code>docker compose up -d</code>.</p>
+    </article>
+    <article class="sv-way" id="linux" aria-labelledby="linux-h">
+      <div class="sv-way-head"><svg class="sv-way-i" aria-hidden="true"><use href="#i-term"/></svg><div><h3 id="linux-h">On Linux, one command</h3><p>Raspberry Pi OS, Ubuntu, Debian and most others, 64-bit.</p></div></div>
+      <div class="sv-code">
+        <span class="dx-term-bar" aria-hidden="true"><i></i><i></i><i></i>terminal</span>
+<pre><code><em>$</em> curl -fsSL https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/install.sh | sh</code></pre>
+        <button class="sv-copy" type="button" data-copy="curl -fsSL https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/install.sh | sh"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button>
+      </div>
+      <ol class="dx-rail">
+        <li><b>Paste it into the server's terminal.</b><span>It checks the download, then installs KRNL0 as a locked-down service with its own user.</span></li>
+        <li><b>Answer four questions.</b><span>Right in the terminal: what the server does, encryption, its address, and your password. Step 2 shows them.</span></li>
+      </ol>
+      <p class="sv-alt">Curious what it runs? <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/blob/main/install.sh">Read install.sh</a> first; it's short. Run the same command again to update.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ 2 · OWNER ACCOUNT ═══ -->
+<section class="dx-os sv-step sv-s2" id="setup" aria-labelledby="s2-h">
+  <header class="dx-os-head">
+    <span class="sv-n" aria-hidden="true">2</span>
+    <h2 id="s2-h">Make it yours</h2>
+    <span class="sv-head-note">One owner, with a password only you know.</span>
+  </header>
+  <div class="dx-os-body">
+    <div>
+      <p class="dx-why">On Linux, the installer asks you in the terminal and ends with a QR code for your phone. With Docker, you do the same in your browser.</p>
+      <ol class="dx-rail">
+        <li><b>Open the address in a browser.</b><span>The one from the log, like <code>https://192.168.1.20:8443</code>.</span></li>
+        <li><b>Continue past the warning, once.</b><span>The server makes its own certificate, so the browser asks first: choose <b>Advanced</b>, then <b>Continue</b>. Want no warning at all? Use <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/blob/main/docs/guides/certificates.md">your own domain or Tailscale</a>.</span></li>
+        <li><b>Type the setup code, then choose a password.</b><span>Twelve characters or more. It's your login on every device from now on.</span></li>
+        <li><b>That's the server done.</b><span>It makes a backup every day by itself, and before every new version.</span></li>
+      </ol>
+    </div>
+    <figure class="dx-art sv-art-setup" aria-hidden="true">
+      <div class="sv-tm">
+        <span class="dx-term-bar"><i></i><i></i><i></i>pi@homelab: ~ — krnl0 setup</span>
+        <div class="sv-tm-body">
+          <span class="sv-tm-logo"><b>█▄▀ █▀█ █▄ █ █   █▀█</b>   <i>server setup</i>
+<b>█ █ █▀▄ █ ▀█ █▄▄ █▄█</b></span>
+<span><b>◆</b>  What should this server do?
+<i>│  Website, App sync</i>
+<i>│</i>
+<b>◆</b>  Encryption
+<i>│  Nothing to set up (self-signed)</i>
+<i>│</i>
+<b>◆</b>  Address and time zone
+<i>│  192.168.1.20 · Europe/Berlin</i>
+<i>│</i>
+<b>◆</b>  Owner password
+<i>│  Saved</i></span>
+          <span class="sv-tm-done"><em>DONE</em> KRNL0 server is set up</span>
+          <span class="sv-tm-fin">
+            <svg class="sv-qr" viewBox="-2 -2 29 29"><rect x="-2" y="-2" width="29" height="29" fill="#f4efe2"/><path fill="#0a0908" d="M0 0h7v1h-7zM9 0h1v1h-1zM12 0h5v1h-5zM18 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h3v1h-3zM14 1h3v1h-3zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h3v1h-3zM12 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM18 2h1v1h-1zM20 2h3v1h-3zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h3v1h-3zM15 3h2v1h-2zM18 3h1v1h-1zM20 3h3v1h-3zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM10 4h1v1h-1zM15 4h2v1h-2zM18 4h1v1h-1zM20 4h3v1h-3zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM15 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h7v1h-7zM8 7h3v1h-3zM12 7h2v1h-2zM16 7h1v1h-1zM0 8h3v1h-3zM4 8h5v1h-5zM10 8h2v1h-2zM13 8h6v1h-6zM22 8h1v1h-1zM3 9h3v1h-3zM10 9h2v1h-2zM13 9h2v1h-2zM18 9h2v1h-2zM24 9h1v1h-1zM0 10h1v1h-1zM2 10h2v1h-2zM5 10h5v1h-5zM14 10h1v1h-1zM16 10h1v1h-1zM19 10h2v1h-2zM22 10h3v1h-3zM2 11h4v1h-4zM11 11h1v1h-1zM13 11h1v1h-1zM15 11h1v1h-1zM19 11h1v1h-1zM23 11h1v1h-1zM0 12h3v1h-3zM5 12h2v1h-2zM12 12h4v1h-4zM18 12h2v1h-2zM21 12h1v1h-1zM23 12h2v1h-2zM4 13h2v1h-2zM8 13h2v1h-2zM11 13h2v1h-2zM14 13h1v1h-1zM18 13h2v1h-2zM21 13h1v1h-1zM24 13h1v1h-1zM0 14h1v1h-1zM2 14h2v1h-2zM5 14h3v1h-3zM10 14h5v1h-5zM16 14h1v1h-1zM18 14h2v1h-2zM22 14h3v1h-3zM1 15h5v1h-5zM7 15h1v1h-1zM12 15h2v1h-2zM16 15h3v1h-3zM20 15h1v1h-1zM23 15h1v1h-1zM0 16h1v1h-1zM2 16h6v1h-6zM9 16h1v1h-1zM11 16h4v1h-4zM16 16h6v1h-6zM8 17h1v1h-1zM11 17h1v1h-1zM14 17h1v1h-1zM16 17h1v1h-1zM20 17h2v1h-2zM23 17h2v1h-2zM0 18h7v1h-7zM8 18h1v1h-1zM14 18h3v1h-3zM18 18h1v1h-1zM20 18h2v1h-2zM23 18h2v1h-2zM0 19h1v1h-1zM6 19h1v1h-1zM8 19h3v1h-3zM13 19h1v1h-1zM15 19h2v1h-2zM20 19h2v1h-2zM0 20h1v1h-1zM2 20h3v1h-3zM6 20h1v1h-1zM8 20h1v1h-1zM13 20h2v1h-2zM16 20h6v1h-6zM0 21h1v1h-1zM2 21h3v1h-3zM6 21h1v1h-1zM9 21h1v1h-1zM13 21h2v1h-2zM17 21h1v1h-1zM19 21h4v1h-4zM0 22h1v1h-1zM2 22h3v1h-3zM6 22h1v1h-1zM8 22h3v1h-3zM12 22h1v1h-1zM16 22h1v1h-1zM20 22h1v1h-1zM24 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM10 23h4v1h-4zM16 23h1v1h-1zM18 23h1v1h-1zM20 23h2v1h-2zM23 23h1v1h-1zM0 24h7v1h-7zM8 24h3v1h-3zM13 24h2v1h-2zM16 24h1v1h-1zM19 24h1v1h-1zM23 24h2v1h-2z"/></svg>
+            <span class="sv-tm-facts"><i>open</i>      <b>https://192.168.1.20:8443</b>
+<i>website</i>   <b>◆</b> on
+<i>app sync</i>  <b>◆</b> on
+<i>time zone</i> Europe/Berlin
+<i>scan with your phone</i></span>
+          </span>
+        </div>
+      </div>
+      <div class="sv-peek">
+        <img src="assets/stills/srv-setup-phone.webp" width="780" height="1688" alt="" loading="lazy">
+        <span>With Docker: the same, in your browser</span>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══ 3 · PHONE ═══ -->
+<section class="dx-os sv-step sv-s3" id="phone" aria-labelledby="s3-h">
+  <header class="dx-os-head">
+    <span class="sv-n" aria-hidden="true">3</span>
+    <h2 id="s3-h">Open it on your phone</h2>
+    <span class="sv-head-note">No app to install. KRNL0 opens in its browser.</span>
+  </header>
+  <div class="dx-os-body sv-body-flip">
+    <figure class="dx-art sv-art-phones">
+      <span class="sv-phone"><img src="assets/stills/srv-login-phone.webp" width="780" height="1688" alt="The KRNL0 login page on a phone: the cube, Log in, and a password field" loading="lazy"></span>
+      <span class="sv-phone sv-phone-b"><img src="assets/stills/srv-phone-today.webp" width="780" height="1688" alt="Today on a phone: the timer, today's plans with their times, and the tabs along the bottom" loading="lazy"></span>
+    </figure>
+    <div>
+      <p class="dx-why">Today puts the timer, your plans and your habits on one screen. Calendar, Habits, Insights and the Canvas are one tap away, and Focus shows the timer full size while it runs.</p>
+      <ol class="dx-rail">
+        <li><b>Scan the QR code, or type the address.</b><span>The same one as on the computer. Your phone needs to be on your home Wi-Fi, or anywhere with Tailscale or your own domain.</span></li>
+        <li><b>Continue past the warning, once.</b><span>Your phone asks too. On an iPhone tap <b>Show Details</b>, then <b>visit this website</b>.</span></li>
+        <li><b>Log in with your password.</b><span>Your board is there, with everything your computers did.</span></li>
+        <li><b>Hold a finger on a plan or a habit.</b><span>It opens the same menu as a right-click. On the Canvas, one finger moves and two zoom.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 · COMPUTERS ═══ -->
+<section class="dx-os sv-step sv-s4" id="connect" aria-labelledby="s4-h">
+  <header class="dx-os-head">
+    <span class="sv-n" aria-hidden="true">4</span>
+    <h2 id="s4-h">Connect your computers</h2>
+    <span class="sv-head-note">Once on each computer with the KRNL0 app.</span>
+  </header>
+  <div class="dx-os-body">
+    <div>
+      <p class="dx-why">Each computer keeps working offline and catches up when it's back. Edits made on two devices at the same moment are both kept.</p>
+      <ol class="dx-rail">
+        <li><b>Click <span class="sv-pill">saved</span> in the top bar.</b><span>Then click <b>Connect server</b>.</span></li>
+        <li><b>Type the server's address, then Find.</b><span>KRNL0 shows the server's fingerprint: eight groups of letters and numbers.</span></li>
+        <li><b>Check that it matches.</b><span>On the server, <code>krnl0 fingerprint</code> shows the same groups (with Docker: <code>docker exec krnl0 krnl0 fingerprint</code>). Then tick <b>It matches my server</b>.</span></li>
+        <li><b>Type your password, then Connect.</b><span>The badge now says <span class="sv-pill">saved · synced</span>. Do the same on your other computers.</span></li>
+      </ol>
+    </div>
+    <figure class="dx-art sv-art-connect" aria-hidden="true">
+      <div class="sv-app">
+        <span class="sv-app-bar"><img src="assets/krnl0-logo-128.png" width="22" height="22" alt=""><b>KRNL0</b><span class="sv-badge"><i></i>saved</span></span>
+        <div class="sv-sheet">
+          <b class="sv-sheet-t">Connect your KRNL0 server</b>
+          <span class="sv-cap-s">Address</span>
+          <span class="sv-field">192.168.1.20:8443</span>
+          <span class="sv-found">Found KRNL0 server · self-signed</span>
+          <span class="sv-fp">
+            <span class="sv-cap-s">Fingerprint — compare with “krnl0 fingerprint”</span>
+            <span class="sv-fp-g"><span>7A:1C:2C:FD</span><span>6E:8F:FA:2E</span><span>DC:45:34:66</span><span>41:7B:E8:3D</span><span>3D:AE:6A:57</span><span>72:E2:EC:FF</span><span>0A:CA:DB:66</span><span>74:65:EA:A4</span></span>
+            <span class="sv-check"><i><svg viewBox="0 0 24 24"><use href="#i-ok"/></svg></i>It matches my server</span>
+          </span>
+          <span class="sv-cap-s">Password</span>
+          <span class="sv-field sv-dots">••••••••••••••</span>
+          <span class="sv-sheet-btns"><span class="sv-ghost">Cancel</span><span class="sv-go">CONNECT</span></span>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══ GOOD TO KNOW ═══ -->
+<section class="dx-facts" aria-label="Good to know">
+  <div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>Encrypted, always</b><span>Every connection is HTTPS. The app checks the server's fingerprint, and its key stays in your computer's keychain. Passwords are stored only as hashes.</span></div>
+  <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><b>Your data, one folder</b><span>Everything lives in one folder on your server, with a backup every day. Nothing is sent anywhere, apart from a daily check for a new version, which you can switch off.</span></div>
+  <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg><b>Updates when you say</b><span>The server tells you when a new version is out and never updates itself. When you update, it backs up your data first.</span></div>
+</section>
+
+<!-- ═══ EVERYDAY COMMANDS ═══ -->
+<section class="sv-cmds" aria-labelledby="cmds-h">
+  <div class="sv-cmds-head">
+    <h2 id="cmds-h">Everyday commands</h2>
+    <p>Type them on the server. With Docker, put <code>docker exec -it krnl0</code> in front.</p>
+  </div>
+  <dl>
+    <div><dt><code>krnl0 status</code></dt><dd>Is it running, its address and fingerprint, and whether a new version is out.</dd></div>
+    <div><dt><code>krnl0 doctor</code></dt><dd>Checks everything, and says how to fix what isn't right.</dd></div>
+    <div><dt><code>krnl0 2fa enable</code></dt><dd>Adds a code from your phone to every login.</dd></div>
+    <div><dt><code>krnl0 devices</code></dt><dd>The computers connected to it. Remove one you no longer use.</dd></div>
+    <div><dt><code>krnl0 backup</code></dt><dd>A backup right now, on top of the daily ones.</dd></div>
+    <div><dt><code>krnl0 help</code></dt><dd>Everything else, in plain words.</dd></div>
+  </dl>
+</section>
+
+<section class="dx-help" aria-labelledby="help-h">
+  <h2 id="help-h">Stuck? We'll help.</h2>
+  <ul>
+    <li><a href="https://github.com/theMindDeveloper/krnl0-server"><b>The server on GitHub</b><span>Guides, the source, and every release</span><i aria-hidden="true">↗</i></a></li>
+    <li><a href="https://github.com/theMindDeveloper/krnl0-server/blob/main/docs/guides/certificates.md"><b>No browser warning</b><span>Your own domain, Tailscale or your own proxy</span><i aria-hidden="true">↗</i></a></li>
+    <li><a href="https://github.com/theMindDeveloper/krnl0-server/issues/new"><b>Report a problem</b><span>Tell us what happened, and we'll fix it</span><i aria-hidden="true">↗</i></a></li>
+  </ul>
+</section>
+
+</main>
+
+
+<footer class="foot" aria-labelledby="foot-h">
+  <h2 id="foot-h" class="blocks" aria-label="KRNL0">
+    <span class="b b1"><small>keep focus</small>K</span><span class="b b2"><small>routines</small>R</span><span class="b b3"><small>now</small>N</span><span class="b b4"><small>local</small>L</span><span class="b b5"><small>zero cost</small>0</span>
+  </h2>
+  <div class="foot-cols">
+    <ul>
+      <li><a href="index.html#try">Overview</a></li>
+      <li><a href="index.html#tour">Tour</a></li>
+      <li><a href="index.html#inside">Features</a></li>
+      <li><a href="index.html#replaces">One app</a></li>
+      <li><a href="index.html#day">A day</a></li>
+      <li><a href="index.html#faq">Questions</a></li>
+    </ul>
+    <ul>
+      <li><a href="download.html">Download</a></li>
+      <li><a href="server.html">Server</a></li>
+      <li><a href="https://github.com/theMindDeveloper/krnl0">Source on GitHub</a></li>
+      <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/CHANGELOG.md">Changelog</a></li>
+      <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/LICENSE.md">Licence</a></li>
+    </ul>
+    <p class="foot-note">Built by theMindDeveloper. Free and open source.</p>
+  </div>
+  <div class="foot-last">
+    <p>© 2026 KRNL0 · <a class="foot-gh" href="https://github.com/theMindDeveloper"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg>theminddev</a></p>
+    <a class="btn btn-small" href="#sv-h"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5"/></svg><span class="btn-t">Back to the top</span></a>
+  </div>
+</footer>
+<script src="server.js?v=ed357cef4c" defer></script>
+</body>
+</html>
