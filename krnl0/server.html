@@ -113,7 +113,7 @@
         <li><b>Paste it and press Enter.</b><span>It finds your address and time zone, sets up KRNL0 and its updater in <code>krnl0</code> in your home folder, and starts them.</span></li>
         <li><b>Answer one question.</b><span>"Update by itself at night?" Either way, updates are one click in the KRNL0 app. At the end it shows the address and a one-time <b>setup code</b> for step 2.</span></li>
       </ol>
-      <p class="sv-alt">Already ran KRNL0 with <code>docker run</code>? The same command moves it over and keeps your data. Prefer to do it by hand? <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/compose.yml">compose.yml</a> and <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/env.example">env.example</a> (save it as <code>.env</code>), then <code>docker compose up -d</code>.</p>
+      <p class="sv-alt">Already ran KRNL0 with <code>docker run</code>? The same command moves it over and keeps your data. Prefer to do it by hand? <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/compose.yml">compose.yml</a> and <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/env.example">env.example</a> (save it as <code>.env</code>), then <code>docker volume create krnl0-data</code> and <code>docker compose up -d</code>.</p>
     </article>
     <article class="sv-way" id="linux" aria-labelledby="linux-h">
       <div class="sv-way-head"><svg class="sv-way-i" aria-hidden="true"><use href="#i-term"/></svg><div><h3 id="linux-h">On Linux, one command</h3><p>Raspberry Pi OS, Ubuntu, Debian and most others, 64-bit.</p></div></div>
