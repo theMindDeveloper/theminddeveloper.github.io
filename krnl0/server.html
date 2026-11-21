@@ -21,7 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet"><!-- taste-skill-ignore: KRNL0 brand face -->
 <link rel="stylesheet" href="styles.css?v=236a582168">
 <link rel="stylesheet" href="download.css?v=99b8617691">
-<link rel="stylesheet" href="server.css?v=32f71331ba">
+<link rel="stylesheet" href="server.css?v=975662d0b0">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body class="dl-page sv-page">
@@ -100,19 +100,20 @@
     <article class="sv-way" id="docker" aria-labelledby="docker-h">
       <div class="sv-way-head"><svg class="sv-way-i" aria-hidden="true"><use href="#i-whale"/></svg><div><h3 id="docker-h">With Docker</h3><p>A NAS, a home server, or Docker Desktop on Windows and Mac.</p></div></div>
       <div class="sv-code">
-        <span class="dx-term-bar" aria-hidden="true"><i></i><i></i><i></i>terminal</span>
-<pre><code><em>$</em> docker run -d --name krnl0 --restart unless-stopped \
-    -p 8443:8443 -v krnl0-data:/data \
-    -e KRNL0_HOSTS=<mark>192.168.1.20</mark> -e TZ=<mark>Europe/Berlin</mark> \
-    ghcr.io/theminddeveloper/krnl0-server:latest
-<em>$</em> docker logs krnl0</code></pre>
-        <button class="sv-copy" type="button" data-copy="docker run -d --name krnl0 --restart unless-stopped -p 8443:8443 -v krnl0-data:/data -e KRNL0_HOSTS=192.168.1.20 -e TZ=Europe/Berlin ghcr.io/theminddeveloper/krnl0-server:latest"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button>
+        <span class="dx-term-bar" aria-hidden="true"><i></i><i></i><i></i>Linux and Mac · terminal</span>
+<pre><code><em>$</em> curl -fsSL https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/docker.sh | sh</code></pre>
+        <button class="sv-copy" type="button" data-copy="curl -fsSL https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/docker.sh | sh"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button>
+      </div>
+      <div class="sv-code sv-code-2">
+        <span class="dx-term-bar" aria-hidden="true"><i></i><i></i><i></i>Windows · PowerShell</span>
+<pre><code><em>&gt;</em> irm https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/docker.ps1 | iex</code></pre>
+        <button class="sv-copy" type="button" data-copy="irm https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/docker.ps1 | iex"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button>
       </div>
       <ol class="dx-rail">
-        <li><b>Change the two marked parts.</b><span>Your server's address on your home network, and your <a class="sv-in" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">time zone</a>, so your days start at your midnight.</span></li>
-        <li><b>Run it, then read the log.</b><span><code>docker logs krnl0</code> shows the address to open and a one-time <b>setup code</b>. Keep it for step 2.</span></li>
+        <li><b>Paste it and press Enter.</b><span>It finds your address and time zone, sets up KRNL0 and its updater in <code>krnl0</code> in your home folder, and starts them.</span></li>
+        <li><b>Answer one question.</b><span>"Update by itself at night?" Either way, updates are one click in the KRNL0 app. At the end it shows the address and a one-time <b>setup code</b> for step 2.</span></li>
       </ol>
-      <p class="sv-alt">Prefer Docker Compose? Get <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/compose.yml">compose.yml</a> and <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/env.example">env.example</a> (save it as <code>.env</code>), then <code>docker compose up -d</code>.</p>
+      <p class="sv-alt">Already ran KRNL0 with <code>docker run</code>? The same command moves it over and keeps your data. Prefer to do it by hand? <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/compose.yml">compose.yml</a> and <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/env.example">env.example</a> (save it as <code>.env</code>), then <code>docker volume create krnl0-data</code> and <code>docker compose up -d</code>.</p>
     </article>
     <article class="sv-way" id="linux" aria-labelledby="linux-h">
       <div class="sv-way-head"><svg class="sv-way-i" aria-hidden="true"><use href="#i-term"/></svg><div><h3 id="linux-h">On Linux, one command</h3><p>Raspberry Pi OS, Ubuntu, Debian and most others, 64-bit.</p></div></div>
@@ -122,10 +123,10 @@
         <button class="sv-copy" type="button" data-copy="curl -fsSL https://github.com/theMindDeveloper/krnl0-server/releases/latest/download/install.sh | sh"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button>
       </div>
       <ol class="dx-rail">
-        <li><b>Paste it into the server's terminal.</b><span>It checks the download, then installs KRNL0 as a locked-down service with its own user.</span></li>
-        <li><b>Answer four questions.</b><span>Right in the terminal: what the server does, encryption, its address, and your password. Step 2 shows them.</span></li>
+        <li><b>Paste it into the server's terminal.</b><span>It checks the download, then installs KRNL0 as a locked-down service with its own user, and its updater.</span></li>
+        <li><b>Answer a few questions.</b><span>Right in the terminal: what the server does, encryption, its address, your password, and whether it may update itself at night. Step 2 shows them.</span></li>
       </ol>
-      <p class="sv-alt">Curious what it runs? <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/blob/main/install.sh">Read install.sh</a> first; it's short. Run the same command again to update.</p>
+      <p class="sv-alt">Curious what it runs? <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/blob/main/install.sh">Read install.sh</a> first; it's short. After that, updates are one click in the KRNL0 app.</p>
     </article>
   </div>
 </section>
@@ -139,9 +140,9 @@
   </header>
   <div class="dx-os-body">
     <div>
-      <p class="dx-why">On Linux, the installer asks you in the terminal and ends with a QR code for your phone. With Docker, you do the same in your browser.</p>
+      <p class="dx-why">On Linux, the installer asks you in the terminal and ends with a QR code for your phone. With Docker, you do the same in your browser, with the setup code it printed.</p>
       <ol class="dx-rail">
-        <li><b>Open the address in a browser.</b><span>The one from the log, like <code>https://192.168.1.20:8443</code>.</span></li>
+        <li><b>Open the address in a browser.</b><span>The one it printed, like <code>https://192.168.1.20:8443</code>. On Windows it opens by itself.</span></li>
         <li><b>Continue past the warning, once.</b><span>The server makes its own certificate, so the browser asks first: choose <b>Advanced</b>, then <b>Continue</b>. Want no warning at all? Use <a class="sv-in" href="https://github.com/theMindDeveloper/krnl0-server/blob/main/docs/guides/certificates.md">your own domain or Tailscale</a>.</span></li>
         <li><b>Type the setup code, then choose a password.</b><span>Twelve characters or more. It's your login on every device from now on.</span></li>
         <li><b>That's the server done.</b><span>It makes a backup every day by itself, and before every new version.</span></li>
@@ -250,7 +251,7 @@
 <section class="dx-facts" aria-label="Good to know">
   <div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>Encrypted, always</b><span>Every connection is HTTPS. The app checks the server's fingerprint, and its key stays in your computer's keychain. Passwords are stored only as hashes.</span></div>
   <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><b>Your data, one folder</b><span>Everything lives in one folder on your server, with a backup every day. Nothing is sent anywhere, apart from a daily check for a new version, which you can switch off.</span></div>
-  <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg><b>Updates when you say</b><span>The server tells you when a new version is out and never updates itself. When you update, it backs up your data first.</span></div>
+  <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg><b>Updates in one click</b><span>When a new version is out, the KRNL0 app says so: click Update server and type your password, or let it update itself at night. It backs up first and goes back by itself if anything fails.</span></div>
 </section>
 
 <!-- ═══ EVERYDAY COMMANDS ═══ -->
@@ -264,6 +265,7 @@
     <div><dt><code>krnl0 doctor</code></dt><dd>Checks everything, and says how to fix what isn't right.</dd></div>
     <div><dt><code>krnl0 2fa enable</code></dt><dd>Adds a code from your phone to every login.</dd></div>
     <div><dt><code>krnl0 devices</code></dt><dd>The computers connected to it. Remove one you no longer use.</dd></div>
+    <div><dt><code>krnl0 update</code></dt><dd>Is a new version out, and how did the last update go. <code>krnl0 update now</code> updates.</dd></div>
     <div><dt><code>krnl0 backup</code></dt><dd>A backup right now, on top of the daily ones.</dd></div>
     <div><dt><code>krnl0 help</code></dt><dd>Everything else, in plain words.</dd></div>
   </dl>

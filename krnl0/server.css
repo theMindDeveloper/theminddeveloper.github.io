@@ -160,3 +160,4 @@
   .sv-fp-g { font-size: 12px; gap: 4px 10px; }
 }
 @media (prefers-reduced-motion: reduce) { .sv-copy, .sv-in { transition: none; } }
+.sv-code + .sv-code-2 { margin-top: -18px; }
