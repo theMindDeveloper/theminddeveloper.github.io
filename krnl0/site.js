@@ -110,13 +110,14 @@
   }
   // the radio is exactly its widget: when it grows (a sound is added), its frame grows with it
   addEventListener('message', (e) => {
+    if (e.origin !== location.origin) return;
     const h = e.data && e.data.krnlRadio;
     if (!h || typeof h !== 'number') return;
-    $$('iframe[data-src*="solo=radio"]').forEach((f) => {
-      if (f.contentWindow !== e.source) return;
-      const box = f.closest('.live');
-      if (box) { box.style.setProperty('--h', String(Math.max(320, Math.min(960, h)))); f.height = h; }
-    });
+    const frames = $$('iframe[data-src*="solo=radio"]');
+    // the frame the message came from; Safari does not always give the same window object, so with one radio on the page it is that one
+    const f = frames.find((x) => x.contentWindow === e.source) || (frames.length === 1 ? frames[0] : null);
+    const box = f && f.closest('.live');
+    if (box) { box.style.setProperty('--h', String(Math.max(320, Math.min(960, h)))); f.height = h; }
   });
 
   /* A live part waits for a click or tap before it takes the wheel, so scrolling the page never gets stuck inside it. */
