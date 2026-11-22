@@ -115,7 +115,7 @@
     $$('iframe[data-src*="solo=radio"]').forEach((f) => {
       if (f.contentWindow !== e.source) return;
       const box = f.closest('.live');
-      if (box) { box.style.setProperty('--h', String(Math.max(320, Math.min(520, h)))); f.height = h; }
+      if (box) { box.style.setProperty('--h', String(Math.max(320, Math.min(960, h)))); f.height = h; }
     });
   });
 
@@ -713,6 +713,16 @@
     arriving.forEach((el) => seen.observe(el));
   } else arriving.forEach((el) => el.classList.add('is-in'));
 
+  /* The phone's top bar: a three-dot menu holds the links that the bar has no room for. */
+  const menuBtn = $('.nav-menu'), sheet = $('.nav-sheet');
+  if (menuBtn && sheet) {
+    const shut = () => { sheet.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); };
+    menuBtn.addEventListener('click', (e) => { e.stopPropagation(); const open = sheet.hidden; sheet.hidden = !open; menuBtn.setAttribute('aria-expanded', String(open)); });
+    sheet.addEventListener('click', (e) => { if (e.target.closest('a')) shut(); });
+    document.addEventListener('click', (e) => { if (!sheet.hidden && !sheet.contains(e.target)) shut(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+  }
+
   /* 10b. On a phone a Windows program cannot be installed: a bar offers to send the link to a computer. */
   const dock = $('#dock'), send = $('#dock-send');
   if (dock && send && 'IntersectionObserver' in window) {
@@ -728,7 +738,7 @@
     send.addEventListener('click', () => {
       const url = location.href.split('#')[0].replace(/index\.html$/, '');
       if (navigator.share) { navigator.share({ title: 'KRNL0', text: 'Your whole day, one canvas', url }).catch(() => {}); return; }
-      const done = () => { send.textContent = 'Link copied'; setTimeout(() => { send.textContent = 'Send the link to my computer'; }, 2200); };
+      const done = () => { send.textContent = 'Link copied'; setTimeout(() => { send.textContent = 'Send to my computer'; }, 2200); };
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, () => {});
     });
   }
