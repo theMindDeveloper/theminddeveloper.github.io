@@ -31,7 +31,7 @@
         if (pan) {
           requestAnimationFrame(() => { el.scrollLeft = w > 1200 ? 0 : (el.scrollWidth - el.clientWidth) * 0.45; });
           const win = el.closest('.win');
-          if (win && !win.querySelector('.pan-hint')) {
+          if (false && win && !win.querySelector('.pan-hint')) {
             const hint = document.createElement('span');
             hint.className = 'pan-hint';
             hint.textContent = 'Swipe sideways to see more';
@@ -197,8 +197,8 @@
     const size = () => {
       const col = scene.parentElement;
       const cs = getComputedStyle(hero);
-      const kw = col.clientWidth / (wide.matches ? 624 : 664);
-      let kh = (innerHeight * 0.5) / 610;
+      const kw = col.clientWidth / (wide.matches ? 624 : 600);
+      let kh = wide.matches ? (innerHeight * 0.5) / 610 : col.clientHeight / 610;
       if (wide.matches) {
         const strip = $('#strip');
         const room = innerHeight - hero.offsetTop - (strip ? strip.offsetHeight : 0) - parseFloat(cs.rowGap) - parseFloat(cs.paddingBottom)
@@ -267,6 +267,22 @@
       if (seen) raf = requestAnimationFrame(tick);
     };
     const run = () => { if (!raf && !calm.matches) { t0 = performance.now(); raf = requestAnimationFrame(tick); } };
+
+    // on a phone the headline and the cube drift at different speeds as you scroll, and the scroll turns the cube
+    if (!wide.matches && !calm.matches) {
+      const title = $('h1', hero), col = scene.parentElement;
+      let queued = false;
+      const drift = () => {
+        queued = false;
+        const y = clamp(scrollY, 0, innerHeight * 1.2);
+        aim.y = y * 0.14;
+        aim.x = -y * 0.02;
+        if (title) title.style.transform = 'translate3d(0, ' + (y * 0.2).toFixed(1) + 'px, 0)';
+        col.style.transform = 'translate3d(0, ' + (-y * 0.12).toFixed(1) + 'px, 0)';
+        run();
+      };
+      addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(drift); } }, { passive: true });
+    }
 
     if (calm.matches) { cube.classList.add('is-built', 'is-settled'); scene.classList.add('is-built'); paint(); }
     else {
@@ -509,6 +525,7 @@
       li.append(copy);
     });
     let shown = 0;
+    const cols = $('.nine-cols', nine);
     const fly = (from, to, done) => {
       const a = from.getBoundingClientRect(), b = to.getBoundingClientRect();
       const el = document.createElement('i');
@@ -540,7 +557,7 @@
       if (count) count.textContent = String(k);
       nine.classList.toggle('all', k >= 9);
     };
-    const pinned = matchMedia('(min-width: 900px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)');
+    const pinned = matchMedia('(min-height: 560px) and (prefers-reduced-motion: no-preference)');
     let played = false;
     nineStep = () => {
       const r = nine.getBoundingClientRect();
@@ -549,15 +566,19 @@
         const k = Math.max(0, Math.min(9, Math.floor(p * 10.4)));
         return k === shown ? null : () => set(k);
       }
-      if (!played && r.top < innerHeight * 0.6) {
-        played = true;
-        return () => { if (calm.matches) set(9); else for (let k = 1; k <= 9; k++) setTimeout(() => set(k), k * 150); };
-      }
-      return null;
+      if (calm.matches) { if (played) return null; played = true; return () => set(9); }
+      // not pinned (phones): the apps close, and their parts arrive, as the list and the grid pass through the screen
+      const c = cols.getBoundingClientRect();
+      const p = clamp((innerHeight * 0.82 - c.top) / (c.height * 0.8), 0, 1);
+      const k = clamp(Math.floor(p * 9.6), 0, 9);
+      return k === shown ? null : () => set(k);
     };
     set(pinned.matches || !calm.matches ? 0 : 9);
   }
-  if (nine && 'IntersectionObserver' in window) new IntersectionObserver(([e]) => nine.classList.toggle('is-away', !e.isIntersecting), { rootMargin: '80px 0px' }).observe(nine);
+  if ('IntersectionObserver' in window) {
+    const awayWatch = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-away', !e.isIntersecting)), { rootMargin: '80px 0px' });
+    [nine, $('.start')].filter(Boolean).forEach((el) => awayWatch.observe(el));
+  }
 
   /* 7. The day rail: the red mark moves through the day as you scroll. */
   const rail = $('.rail');
@@ -618,6 +639,15 @@
       const big = ch.querySelector('.ch-big');
       if (big) { const v = (((r.top + r.height / 2 - mid) / innerHeight) * -70).toFixed(1); jobs.push(() => { big.style.transform = 'translateY(' + v + 'px)'; }); }
     });
+    const pics = $('.phone-pics');
+    if (pics) {
+      const r = pics.getBoundingClientRect();
+      if (r.bottom > -200 && r.top < innerHeight + 200) {
+        const p = clamp((r.top + r.height / 2 - mid) / innerHeight, -1, 1);
+        const back = pics.lastElementChild, front = pics.firstElementChild;
+        jobs.push(() => { back.style.transform = 'translate3d(0,' + (p * -34).toFixed(1) + 'px,0)'; front.style.transform = 'translate3d(0,' + (p * 64).toFixed(1) + 'px,0)'; });
+      }
+    }
     return () => jobs.forEach((f) => f());
   };
 

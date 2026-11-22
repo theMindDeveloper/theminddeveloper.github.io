@@ -208,3 +208,6 @@
 .sv-alt code, .sv-cmds code, .sv-cmds dt code { background: rgba(18, 17, 16, 0.1); color: var(--ink); }
 .dx-rail .sv-pill, .sv-pill { background: var(--ink); color: var(--acid); }
 .sv-code mark { background: rgba(201, 241, 88, 0.16); color: #c9f158; }
+
+.sv-pix { display: inline-block; vertical-align: middle; fill: #c9f158; shape-rendering: crispEdges; max-width: 60%; height: auto; }
+.sv-tm-logo { display: flex !important; align-items: center; gap: 14px; flex-wrap: wrap; }
