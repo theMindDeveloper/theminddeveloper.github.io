@@ -6,39 +6,37 @@
 <title>Download KRNL0 — install guide for Windows, Mac and Linux</title>
 <meta name="description" content="Download KRNL0 for Windows, Mac or Linux and get it running in a minute. Free, no account, and your plans stay on your computer.">
 <link rel="icon" href="assets/krnl0-logo-128.png">
-<meta name="theme-color" content="#121110">
+<meta name="theme-color" content="#c9f158">
 <meta name="color-scheme" content="dark light">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KRNL0">
 <meta property="og:title" content="Download KRNL0">
 <meta property="og:description" content="Free, no account. Install guide for Windows, Mac and Linux.">
 <meta property="og:image" content="https://theminddev.com/krnl0/assets/og-3.jpg">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; frame-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self' blob:; frame-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="apple-touch-icon" href="assets/krnl0-logo-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet"><!-- taste-skill-ignore: KRNL0 brand face -->
-<link rel="stylesheet" href="styles.css?v=236a582168">
-<link rel="stylesheet" href="download.css?v=99b8617691">
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css?v=625a4ad2c8">
+<link rel="stylesheet" href="download.css?v=9308f51fa2">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body class="dl-page">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="topnav">
-  <a class="brand" href="index.html"><img src="assets/krnl0-logo-128.png" width="28" height="28" alt="">KRNL0</a>
-  <nav aria-label="Main">
-    <a href="index.html#try">Overview</a>
-    <a href="index.html#tour">Tour</a>
-    <a href="index.html#inside">Features</a>
+<header class="nav" id="top">
+  <a class="brand" href="index.html" aria-label="KRNL0, home"><img src="assets/krnl0-logo-128.png" width="30" height="30" alt=""><span>KRNL0</span></a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="index.html">Home</a>
     <a href="#windows">Windows</a>
     <a href="#mac">Mac</a>
     <a href="#linux">Linux</a>
+    <a href="server.html">Your own server</a>
   </nav>
-  <a class="btn btn-sm btn-gh" href="https://github.com/theMindDeveloper" aria-label="theMindDeveloper on GitHub"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a>
-  <a class="btn btn-sm" href="#get" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4 18v2h16v-2"/></svg><span class="btn-t">Download</span></a>
+  <a class="btn btn-sm" href="#get" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M4 19.5h16"/></svg>Download</a>
 </header>
+<nav class="paths" aria-label="Install KRNL0 or run your own server"><a href="download.html" aria-current="page"><b>Install KRNL0</b><span>Windows, Mac and Linux</span></a><a href="server.html"><b>Your own server</b><span>Phone and every computer</span></a></nav>
 
 <main id="main" class="dx">
 
@@ -68,7 +66,31 @@
     </div>
     <p class="dx-phone" hidden>You're on a phone. KRNL0 runs on a computer: open this page on your Windows PC, Mac or Linux machine.</p>
   </div>
-  <div class="dx-hero-art"><img src="assets/stills/download-cube.webp" width="1200" height="840" alt="The KRNL0 cube with the timer, to-do list, habits and terminal wired to it"></div>
+  <div class="dx-hero-art"><div class="cube-col dx-cube">
+      <div class="cube-scene" id="cube-scene">
+        <div class="cube-floor" aria-hidden="true"></div>
+        <div class="cube" id="cube" role="group" aria-label="KRNL0 for Windows, Mac and Linux. Drag to turn the cube, or pick your system.">
+          <div class="face f-front">
+            <a class="t t-os t-win" href="#windows" data-tile="win" data-say="Windows 10 and 11: an installer, ready in a minute"><svg aria-hidden="true"><use href="#i-win"/></svg><em>Windows</em></a>
+            <a class="t t-os t-mac" href="#mac" data-tile="mac" data-say="Mac with Apple silicon: a disk image"><svg aria-hidden="true"><use href="#i-mac"/></svg><em>Mac</em></a>
+            <a class="t t-os t-lin" href="#linux" data-tile="lin" data-say="Linux: one AppImage that runs on most distributions"><svg aria-hidden="true"><use href="#i-linux"/></svg><em>Linux</em></a>
+            <span class="t t-txt" data-tile="free" data-say="Free: no subscription, no trial"><b>Free</b><small>no cost</small></span>
+            <a class="t t-os t-get" href="#pick-h" data-tile="get" data-say="Pick your computer and follow four short steps"><svg aria-hidden="true"><use href="#i-dl"/></svg><em>Download</em></a>
+            <span class="t t-txt" data-tile="acc" data-say="No account: your plans stay on your computer"><b>No account</b><small>just open it</small></span>
+            <span class="t t-txt" data-tile="min" data-say="Most people are done in about a minute"><b>A minute</b><small>to install</small></span>
+            <span class="t t-txt" data-tile="oss" data-say="The source is public: read it, build it, improve it"><b>Open source</b><small>MIT licence</small></span>
+            <span class="t t-txt" data-tile="upd" data-say="On Windows, KRNL0 updates itself from then on"><b>Updates</b><small>by itself</small></span>
+          </div>
+          <div class="face f-top" aria-hidden="true"><i></i><i></i><i class="k-cyan"></i><i></i><i></i><i></i><i class="k-paper"></i><i></i><i></i></div>
+          <div class="face f-right" aria-hidden="true"><i></i><i class="k-rust"></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="k-purple"></i></div>
+          <div class="face f-left" aria-hidden="true"><i class="k-purple"></i><i></i><i></i><i></i><i class="k-acid"></i><i></i><i></i><i></i><i class="k-cyan"></i></div>
+          <div class="face f-back" aria-hidden="true"><i></i><i class="k-cyan"></i><i></i><b class="wm">KRNL0</b><b class="ver">Version <span data-krnl-v>0.15.0</span></b><i class="k-rust"></i></div>
+          <div class="face f-bottom" aria-hidden="true"><i></i><i></i><i></i><i class="k-rust"></i><i></i><i class="k-paper"></i><i></i><i></i><i></i></div>
+          <div class="core" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+        </div>
+      </div>
+      <p class="cube-say" id="cube-say" aria-live="off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.6M20 4v4.6h-4.6M20 12a8 8 0 0 1-13.7 5.6L4 15.4M4 20v-4.6h4.6"/></svg><span>Turn the cube, or pick your system.</span></p>
+    </div></div>
 </section>
 
 <!-- ═══ PICK YOUR COMPUTER ═══ -->
@@ -200,28 +222,24 @@
   </h2>
   <div class="foot-cols">
     <ul>
-      <li><a href="index.html#try">Overview</a></li>
-      <li><a href="index.html#tour">Tour</a></li>
-      <li><a href="index.html#inside">Features</a></li>
       <li><a href="index.html#replaces">One app</a></li>
-      <li><a href="index.html#day">A day</a></li>
+      <li><a href="index.html#day">A day in it</a></li>
+      <li><a href="index.html#phone">On your phone</a></li>
+      <li><a href="index.html#new">New</a></li>
       <li><a href="index.html#faq">Questions</a></li>
     </ul>
     <ul>
-      <li><a href="download.html">Download</a></li>
-      <li><a href="server.html">Server</a></li>
+      <li><a href="download.html">Download and install</a></li>
+      <li><a href="server.html">Your own server</a></li>
       <li><a href="privacy.html">Privacy</a></li>
       <li><a href="https://github.com/theMindDeveloper/krnl0">Source on GitHub</a></li>
       <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/CHANGELOG.md">Changelog</a></li>
       <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/LICENSE.md">Licence</a></li>
     </ul>
-    <p class="foot-note">Built by theMindDeveloper. Free and open source.</p>
-  </div>
-  <div class="foot-last">
-    <p>© 2026 KRNL0 · <a class="foot-gh" href="https://github.com/theMindDeveloper"><svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg>theminddev</a></p>
-    <a class="btn btn-small" href="#dl-h"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5"/></svg><span class="btn-t">Back to the top</span></a>
+    <p class="foot-note">Built by theMindDeveloper. Free, and the source is public.<br>© 2026 KRNL0</p>
   </div>
 </footer>
-<script src="download.js?v=7e590bbd3a" defer></script>
+<script src="cube.js?v=b30db6624a" defer></script>
+<script src="download.js?v=2c50b9b623" defer></script>
 </body>
 </html>

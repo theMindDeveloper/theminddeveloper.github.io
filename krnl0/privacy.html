@@ -6,91 +6,84 @@
 <title>KRNL0 Privacy</title>
 <meta name="description" content="What KRNL0 keeps, where it keeps it, and what it does with your Google and Apple calendars.">
 <link rel="icon" href="assets/krnl0-logo-128.png">
-<meta name="theme-color" content="#121110">
-<meta name="color-scheme" content="dark light">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="canonical" href="https://theminddev.com/krnl0/privacy.html">
+<meta name="theme-color" content="#c9f158">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="apple-touch-icon" href="assets/krnl0-logo-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet"><!-- taste-skill-ignore: KRNL0 brand face -->
-<link rel="stylesheet" href="styles.css?v=236a582168">
-<link rel="stylesheet" href="download.css?v=99b8617691">
-<style>
-  .pv { max-width: 760px; margin: 0 auto; padding: clamp(40px, 7vw, 96px) var(--edge) 72px; display: flex; flex-direction: column; gap: 40px; }
-  .pv h1 { font-size: clamp(44px, 8vw, 96px); line-height: 0.9; font-weight: 800; letter-spacing: -0.05em; }
-  .pv h1 em { font-style: normal; color: var(--acid); }
-  .pv .when { color: var(--ink-2); font-size: 14px; }
-  .pv section { display: flex; flex-direction: column; gap: 14px; }
-  .pv h2 { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
-  .pv p, .pv li { font-size: 17px; line-height: 1.6; color: var(--ink-2); }
-  .pv strong { color: var(--ink); font-weight: 700; }
-  .pv ul { display: flex; flex-direction: column; gap: 8px; padding-left: 1.2em; list-style: square; }
-  .pv .short { border: 1px solid currentColor; border-color: color-mix(in srgb, var(--acid) 55%, transparent); border-radius: 18px; padding: 22px 24px; }
-  .pv .short p { color: var(--ink); }
-  .pv a:not(.btn) { color: var(--acid); }
-</style>
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css?v=625a4ad2c8">
+<link rel="stylesheet" href="privacy.css?v=da12e42908">
 </head>
-<body class="dl-page">
+<body class="pv-page">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="topnav">
-  <a class="brand" href="index.html"><img src="assets/krnl0-logo-128.png" width="28" height="28" alt="">KRNL0</a>
-  <nav aria-label="Main">
-    <a href="index.html#try">Overview</a>
-    <a href="index.html#inside">Features</a>
-    <a href="server.html">Server</a>
+<header class="nav" id="top">
+  <a class="brand" href="index.html" aria-label="KRNL0, home"><img src="assets/krnl0-logo-128.png" width="30" height="30" alt=""><span>KRNL0</span></a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="index.html#replaces">One app</a>
+    <a href="download.html">How to install</a>
+    <a href="server.html">Your own server</a>
+    <a href="index.html#faq">Questions</a>
   </nav>
-  <a class="btn btn-sm" href="download.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4 18v2h16v-2"/></svg><span class="btn-t">Download</span></a>
+  <a class="btn btn-sm" href="download.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M4 19.5h16"/></svg>Download</a>
 </header>
 
-<main id="main" class="pv">
-  <div>
+<main id="main">
+  <section class="pv-hero" aria-labelledby="pv-h">
+    <p class="pv-when">Privacy · last changed 22 November 2026</p>
     <h1 id="pv-h">Your day stays <em>yours</em>.</h1>
-    <p class="when">Privacy · last changed 22 November 2026</p>
-  </div>
-
-  <div class="short">
-    <p>KRNL0 is an app on your computer. There is no KRNL0 account, no tracking and no ads. Nothing about you or your plans is sent to the people who make KRNL0.</p>
-  </div>
-
-  <section aria-labelledby="pv-keep">
-    <h2 id="pv-keep">What KRNL0 keeps, and where</h2>
-    <p>Your board (plans, events, habits, notes, recorded time) is a file on your computer. If you run your own KRNL0 server, your computers and phone share that board through it, and copies are kept on that server. Both are yours: we never see them.</p>
+    <div class="pv-short">
+      <p>KRNL0 is an app on your computer. There is no KRNL0 account, no tracking and no ads. Nothing about you or your plans is sent to the people who make KRNL0.</p>
+    </div>
   </section>
 
-  <section aria-labelledby="pv-cal">
-    <h2 id="pv-cal">Google and Apple calendars</h2>
-    <p>You can sign in to Google or iCloud in <strong>Calendar › Add your calendars</strong>. KRNL0 talks to Google or Apple directly from your computer. There is no server of ours in between.</p>
-    <ul>
+  <div class="pv-rows">
+  <section class="pv-row" aria-labelledby="pv-keep">
+    <h2 id="pv-keep"><i class="pv-dot pv-acid" aria-hidden="true"></i>What KRNL0 keeps, and where</h2>
+    <div class="pv-body">
+      <p>Your board (plans, events, habits, notes, recorded time) is a file on your computer. If you run your own KRNL0 server, your computers and phone share that board through it, and copies are kept on that server. Both are yours: we never see them.</p>
+    </div>
+  </section>
+  <section class="pv-row" aria-labelledby="pv-cal">
+    <h2 id="pv-cal"><i class="pv-dot pv-cyan" aria-hidden="true"></i>Google and Apple calendars</h2>
+    <div class="pv-body">
+      <p>You can sign in to Google or iCloud in <strong>Calendar › Add your calendars</strong>. KRNL0 talks to Google or Apple directly from your computer. There is no server of ours in between.</p>
+      <ul>
       <li><strong>What it asks for.</strong> Google: access to see and edit your calendars, and your email address (to show which account is signed in). iCloud: your Apple ID email and an app-specific password you make at account.apple.com, never your Apple ID password.</li>
       <li><strong>What it reads.</strong> The calendars you tick, so their events show on your KRNL0 Calendar.</li>
       <li><strong>What it writes.</strong> Only if you switch on "Put KRNL0 on your … too" when you sign in: one calendar named "KRNL0 · your board", kept the same as your board both ways (your events and your plans with a time). KRNL0 never changes or deletes anything in your other calendars.</li>
       <li><strong>Where it is kept.</strong> Your sign-in stays on your computer, locked by your system's own keychain. It is never written into your board and never sent anywhere else. Events read from your calendars are saved in your board, so they are on your own server too if you use one.</li>
       <li><strong>How to stop.</strong> Sign out in <strong>Settings › Calendars</strong>. You can also take KRNL0's access away at any time in your Google account (Security › Third-party access) or by deleting the app-specific password at account.apple.com.</li>
-    </ul>
+      </ul>
+    </div>
   </section>
-
-  <section aria-labelledby="pv-google">
-    <h2 id="pv-google">Google user data</h2>
-    <p>KRNL0's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
-    <ul>
+  <section class="pv-row" aria-labelledby="pv-google">
+    <h2 id="pv-google"><i class="pv-dot pv-rust" aria-hidden="true"></i>Google user data</h2>
+    <div class="pv-body">
+      <p>KRNL0's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+      <ul>
       <li>Your Google calendar data is used only to show your calendars in KRNL0 and keep the KRNL0 calendar in step.</li>
       <li>It is not sold, not used for ads, and not used to train AI models.</li>
       <li>Nobody reads it. It never reaches the people who make KRNL0.</li>
       <li>If you ask KRNL0's assistant to look at your board and you chose an online model for it, what it reads (which can include calendar events on your board) goes to the model provider you chose, to answer you. This happens only when you use the assistant.</li>
-    </ul>
+      </ul>
+    </div>
   </section>
-
-  <section aria-labelledby="pv-net">
-    <h2 id="pv-net">When KRNL0 goes online</h2>
-    <p>Only for things you set up: calendars you sign in to, your own KRNL0 server, an assistant model you chose, and checking GitHub for a new version of KRNL0.</p>
+  <section class="pv-row" aria-labelledby="pv-net">
+    <h2 id="pv-net"><i class="pv-dot pv-purple" aria-hidden="true"></i>When KRNL0 goes online</h2>
+    <div class="pv-body">
+      <p>Only for things you set up: calendars you sign in to, your own KRNL0 server, an assistant model you chose, and checking GitHub for a new version of KRNL0.</p>
+    </div>
   </section>
-
-  <section aria-labelledby="pv-q">
-    <h2 id="pv-q">Questions</h2>
-    <p>KRNL0 is open source: you can read exactly what it does on <a href="https://github.com/theMindDeveloper/krnl0">GitHub</a>. Ask anything there in an issue. If this page changes, the date at the top changes with it.</p>
+  <section class="pv-row" aria-labelledby="pv-q">
+    <h2 id="pv-q"><i class="pv-dot pv-paper" aria-hidden="true"></i>Questions</h2>
+    <div class="pv-body">
+      <p>KRNL0 is open source: you can read exactly what it does on <a href="https://github.com/theMindDeveloper/krnl0">GitHub</a>. Ask anything there in an issue. If this page changes, the date at the top changes with it.</p>
+    </div>
   </section>
+  </div>
 </main>
 
 <footer class="foot" aria-labelledby="foot-h">
@@ -99,22 +92,21 @@
   </h2>
   <div class="foot-cols">
     <ul>
-      <li><a href="index.html#try">Overview</a></li>
-      <li><a href="index.html#inside">Features</a></li>
+      <li><a href="index.html#replaces">One app</a></li>
+      <li><a href="index.html#day">A day in it</a></li>
+      <li><a href="index.html#phone">On your phone</a></li>
+      <li><a href="index.html#new">New</a></li>
       <li><a href="index.html#faq">Questions</a></li>
     </ul>
     <ul>
-      <li><a href="download.html">Download</a></li>
-      <li><a href="server.html">Server</a></li>
+      <li><a href="download.html">Download and install</a></li>
+      <li><a href="server.html">Your own server</a></li>
       <li><a href="privacy.html">Privacy</a></li>
       <li><a href="https://github.com/theMindDeveloper/krnl0">Source on GitHub</a></li>
+      <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/CHANGELOG.md">Changelog</a></li>
       <li><a href="https://github.com/theMindDeveloper/krnl0/blob/main/LICENSE.md">Licence</a></li>
     </ul>
-    <p class="foot-note">Built by theMindDeveloper. Free and open source.</p>
-  </div>
-  <div class="foot-last">
-    <p>© 2026 KRNL0</p>
-    <a class="btn btn-small" href="#pv-h"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5"/></svg><span class="btn-t">Back to the top</span></a>
+    <p class="foot-note">Built by theMindDeveloper. Free, and the source is public.<br>© 2026 KRNL0</p>
   </div>
 </footer>
 </body>
