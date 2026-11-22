@@ -68,8 +68,8 @@
     const size = () => {
       const col = scene.parentElement;
       const cs = getComputedStyle(hero);
-      const kw = col.clientWidth / (wide.matches ? 624 : 664);
-      let kh = (innerHeight * 0.5) / 610;
+      const kw = col.clientWidth / (wide.matches ? 624 : 600);
+      let kh = wide.matches ? (innerHeight * 0.5) / 610 : col.clientHeight / 610;
       if (wide.matches) {
         const strip = $('#strip');
         const room = innerHeight - hero.offsetTop - (strip ? strip.offsetHeight : 0) - parseFloat(cs.rowGap) - parseFloat(cs.paddingBottom)
@@ -138,6 +138,22 @@
       if (seen) raf = requestAnimationFrame(tick);
     };
     const run = () => { if (!raf && !calm.matches) { t0 = performance.now(); raf = requestAnimationFrame(tick); } };
+
+    // on a phone the headline and the cube drift at different speeds as you scroll, and the scroll turns the cube
+    if (!wide.matches && !calm.matches) {
+      const title = $('h1', hero), col = scene.parentElement;
+      let queued = false;
+      const drift = () => {
+        queued = false;
+        const y = clamp(scrollY, 0, innerHeight * 1.2);
+        aim.y = y * 0.14;
+        aim.x = -y * 0.02;
+        if (title) title.style.transform = 'translate3d(0, ' + (y * 0.2).toFixed(1) + 'px, 0)';
+        col.style.transform = 'translate3d(0, ' + (-y * 0.12).toFixed(1) + 'px, 0)';
+        run();
+      };
+      addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(drift); } }, { passive: true });
+    }
 
     if (calm.matches) { cube.classList.add('is-built', 'is-settled'); scene.classList.add('is-built'); paint(); }
     else {

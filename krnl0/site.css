@@ -443,7 +443,7 @@ iframe.is-live { opacity: 1; }
 @keyframes nudge { from { transform: rotate(4deg) translate(0, 0); } to { transform: rotate(-3deg) translate(-6px, 5px); } }
 
 /* ── the nine scene, pinned on wide screens ── */
-@media (min-width: 900px) and (min-height: 620px) and (prefers-reduced-motion: no-preference) {
+@media (min-height: 560px) and (prefers-reduced-motion: no-preference) {
   .js .nine { height: 340vh; }
   .js .nine-pin { position: sticky; top: 0; height: 100vh; justify-content: center; padding-block: clamp(20px, 4vh, 56px); gap: clamp(16px, 3.4vh, 48px); }
 }
@@ -627,7 +627,7 @@ iframe.is-live { opacity: 1; }
   .phone-pics { padding-right: 0; }
 }
 @media (max-width: 860px) and (pointer: coarse) {
-  body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); background: var(--ink); }
+  body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
   .dock .btn { background: var(--ink); color: var(--acid); box-shadow: inset 0 0 0 1px rgba(243, 240, 230, 0.28), 0 10px 30px -8px rgba(18, 17, 16, 0.6); }
 }
 
@@ -710,3 +710,99 @@ iframe.is-live { opacity: 1; }
 
 /* a section that is away from the screen pauses its animations */
 .is-away, .is-away *, .is-away *::before, .is-away *::after { animation-play-state: paused !important; }
+
+
+
+/* "Start in a minute": one big, quiet, still drawing in each card, cropped by the card's edge */
+.start-card { min-height: clamp(420px, 36vw, 540px); isolation: isolate; }
+.c1 { --card: var(--acid); } .c2 { --card: var(--purple); }
+.start-card > :not(.start-art) { position: relative; z-index: 1; }
+.start-art { position: absolute; z-index: 0; right: -16%; bottom: -26%; width: 88%; height: auto; pointer-events: none; fill: rgba(18, 17, 16, 0.09); stroke: none; }
+.start-art .art-cut { fill: none; stroke: var(--card); stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; }
+.start-art .art-dot { fill: var(--card); stroke: none; }
+@media (max-width: 860px) { .start-card { min-height: 0; padding-bottom: clamp(160px, 44vw, 260px); } .start-art { width: 96%; right: -22%; bottom: -30%; } }
+
+/* the strike through a closed tab is a thin line, so the word stays readable */
+.was li s { background-image: linear-gradient(var(--rust), var(--rust)); background-size: 0% 0.065em; }
+.was li.gone s { background-size: 100% 0.065em; }
+
+/* the hero's long sentence is for wide screens */
+.lead-short { display: none; }
+
+@media (max-width: 860px) {
+  /* the day strip fades at its edges instead of being cut */
+  .strip-pan { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%); }
+
+  /* phone hero: the headline, the cube overlapping it and drifting against it as you scroll, one short line, the buttons */
+  .hero { min-height: calc(100vh - 68px); min-height: calc(100svh - 68px); padding-bottom: 22px; gap: 22px; }
+  .hero .hero-main { gap: 0; }
+  .hero .hero-main .meta { display: none; }
+  .hero .lead-long { display: none; }
+  .hero .lead-short { display: inline; }
+  .hero .hero-main h1 { order: 1; position: relative; z-index: 1; }
+  .hero .hero-main .cube-col { order: 2; position: relative; z-index: 2; margin-top: -46px; }
+  .hero .hero-main .lead { order: 3; max-width: 24ch; margin-top: 2px; font-size: 20px; line-height: 1.32; }
+  .hero .hero-main .actions { order: 4; margin-top: 16px; }
+  .hero .cube-say { display: none; }
+  .cube-scene { margin: calc((var(--k, 1) - 1) * 210px + var(--k, 1) * 16px) calc((var(--k, 1) - 1) * 210px + var(--k, 1) * 46px) calc((var(--k, 1) - 1) * 210px + var(--k, 1) * 54px); }
+}
+
+/* round: the cube overlaps only the lower edge of the headline, never its words or the sentence below */
+@media (max-width: 860px) {
+  .hero .hero-main .cube-col { margin-top: -6px; margin-bottom: 34px; }
+  .hero .hero-main .lead { margin-top: 0; }
+  .hero .hero-main h1 { padding-bottom: 8px; }
+}
+.start-art { fill: rgba(18, 17, 16, 0.065); }
+
+
+/* ═══ phone hero, second design: one screen, nothing to scroll ═══ */
+@media (max-width: 860px) {
+  .hero { min-height: 0; padding: 6px var(--margin) 20px; gap: 18px; }
+  .hero .hero-main { display: flex; flex-direction: column; align-items: stretch; gap: 0; min-height: calc(100vh - 68px - 40px); min-height: calc(100svh - 68px - 40px); }
+  .hero .hero-main .meta { display: none; }
+  .hero .hero-copy { display: contents; }
+  .hero .hero-main h1 { order: 1; position: relative; z-index: 1; font-size: clamp(44px, 19.5cqw, 112px); line-height: 1; margin: 0; }
+  .hero .hero-main .cube-col { order: 2; position: relative; z-index: 2; flex: 1 1 0; min-height: 150px; margin: -10px -16px 0; gap: 0; display: block; }
+  .hero .hero-main .lead { order: 3; max-width: 26ch; margin: 0; font-size: 19px; line-height: 1.3; }
+  .hero .hero-main .actions { order: 4; margin-top: 14px; gap: 8px; flex-direction: column; }
+  .hero .hero-main .actions .btn { width: 100%; min-height: 50px; flex: none; }
+  .hero .cube-say { display: none; }
+  .hero .cube-scene { position: absolute; left: 50%; top: 50%; margin: 0; transform: translate(-50%, calc(-50% - 18px * var(--k, 1))) scale(var(--k, 1)); }
+}
+@media (max-width: 860px) and (max-height: 700px) {
+  .hero .hero-main h1 { font-size: clamp(40px, 15.5cqw, 90px); }
+  .hero .hero-main .lead { font-size: 17px; }
+  .hero .hero-main .actions .btn { min-height: 46px; }
+}
+
+
+/* ═══ round 3 ═══ */
+/* no hint labels on the app windows, and no scrollbar under the wide ones */
+.live.is-locked::after, .live.is-manual.is-locked::after { content: none !important; display: none !important; }
+.pan-hint { display: none !important; }
+.live.pan.is-pan { scrollbar-width: none; -ms-overflow-style: none; }
+.live.pan.is-pan::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+/* nine tabs, pinned on a phone: the list on top, the grid under it, all on one screen */
+@media (max-width: 860px) {
+  .js .nine-pin { padding: 18px var(--margin) 14px; gap: 10px; justify-content: center; }
+  .nine-head p { display: none; }
+  .nine h2 { font-size: clamp(34px, 10.4vw, 56px); }
+  .nine-cols { gap: 12px; align-items: start; }
+  .was { gap: 0; }
+  .was li { font-size: 19px; line-height: 1.2; gap: 10px; }
+  .was li span { font-size: 12px; }
+  .grid9-fit { width: min(100%, 31vh, 300px); width: min(100%, 31svh, 300px); }
+  .one { gap: 6px; }
+  .one-n { font-size: 44px; }
+  .one-foot { font-size: 14px; margin-top: 0; }
+}
+
+/* your day on your phone too: the tablet behind, the phone in front */
+.phone-pics { position: relative; display: block; aspect-ratio: 1 / 0.84; padding: 0; width: 100%; max-width: 760px; justify-self: end; }
+.phone-pics img { position: absolute; display: block; height: auto; will-change: transform; transform: none !important; }
+.phone-pics img:first-child { order: 0; right: 2%; bottom: -4%; width: 33%; z-index: 2; border-radius: 22px; box-shadow: 0 40px 70px -20px rgba(18, 17, 16, 0.6); }
+.phone-pics img:last-child { left: 0; top: 0; width: 88%; z-index: 1; border-radius: 16px; box-shadow: 0 36px 64px -26px rgba(18, 17, 16, 0.5); }
+@media (max-width: 860px) { .phone-pics { max-width: 560px; justify-self: stretch; } }
+@media (max-width: 560px) { .phone-pics img:last-child { display: block; } .phone-pics { aspect-ratio: 1 / 0.95; } .phone-pics img:first-child { width: 38%; } .phone-pics img:last-child { width: 92%; } }
