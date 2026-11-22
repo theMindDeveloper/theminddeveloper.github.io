@@ -806,3 +806,42 @@ iframe.is-live { opacity: 1; }
 .phone-pics img:last-child { left: 0; top: 0; width: 88%; z-index: 1; border-radius: 16px; box-shadow: 0 36px 64px -26px rgba(18, 17, 16, 0.5); }
 @media (max-width: 860px) { .phone-pics { max-width: 560px; justify-self: stretch; } }
 @media (max-width: 560px) { .phone-pics img:last-child { display: block; } .phone-pics { aspect-ratio: 1 / 0.95; } .phone-pics img:first-child { width: 38%; } .phone-pics img:last-child { width: 92%; } }
+
+
+/* ═══ round 4 ═══ */
+.nav-menu, .nav-sheet { display: none; }
+@media (max-width: 860px) {
+  .nav { position: relative; }
+  .nav-menu { display: grid; place-items: center; margin-left: auto; width: 44px; height: 44px; border: 0; border-radius: 12px; background: rgba(18, 17, 16, 0.1); color: var(--ink); cursor: pointer; }
+  .nav-menu svg { width: 22px; height: 22px; fill: currentColor; }
+  .nav-menu[aria-expanded='true'] { background: var(--ink); color: var(--acid); }
+  .nav-sheet:not([hidden]) { display: grid; position: absolute; z-index: 30; right: var(--margin); top: calc(100% - 8px); width: min(300px, calc(100vw - 2 * var(--margin))); padding: 8px; border-radius: 20px; background: var(--ink); box-shadow: 0 24px 60px -14px rgba(18, 17, 16, 0.6); }
+  .nav-sheet a { display: flex; align-items: center; min-height: 48px; padding: 0 16px; border-radius: 12px; color: var(--paper); font-size: 17px; font-weight: 550; text-decoration: none; }
+  .nav-sheet a:active { background: #2a2824; }
+  /* a phone cannot install a Windows program or run a server: those two ways in stay out of its page */
+  .start { display: none; }
+}
+
+/* the send-link pill: small, centred, and clear of a phone's rounded bottom corners */
+@media (max-width: 860px) and (pointer: coarse) {
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .dock { left: 50%; right: auto; width: auto; padding: 0; background: none; bottom: calc(16px + env(safe-area-inset-bottom)); transform: translate(-50%, 160%); }
+  .dock.is-on { transform: translate(-50%, 0); }
+  .dock .btn { width: auto; min-height: 42px; padding: 0 20px; border-radius: 999px; font-size: 15px; background: rgba(18, 17, 16, 0.94); color: var(--acid); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgba(243, 240, 230, 0.16), 0 12px 28px -10px rgba(18, 17, 16, 0.55); }
+}
+
+/* nine tabs closed on a phone: a table, with even gaps */
+@media (max-width: 860px) {
+  .js .nine-pin { padding: 22px var(--margin) 18px; gap: 18px; justify-content: center; }
+  .nine h2 { font-size: clamp(34px, 10.4vw, 52px); line-height: 1; }
+  .nine-cols { gap: 22px; }
+  .was { gap: 0; }
+  .was li { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 4px 0 5px; font-size: 18px; line-height: 1.15; border-bottom: 1px solid rgba(243, 240, 230, 0.12); }
+  .was li:last-child { border-bottom: 0; }
+  .was li span { margin-left: auto; font-size: 12px; text-align: right; }
+  .grid9-fit { width: min(100%, 34vh, 300px); width: min(100%, 34svh, 300px); }
+  .one { gap: 0; }
+  .one-foot { margin-top: 16px; gap: 10px; }
+  .one-n { font-size: 44px; line-height: 0.9; }
+  .nine.all .grid9 { box-shadow: 0 0 0 3px var(--acid), 0 0 56px 4px rgba(201, 241, 88, 0.26); }
+}

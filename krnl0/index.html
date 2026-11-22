@@ -29,7 +29,7 @@
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="site.css?v=8a697853e5">
+<link rel="stylesheet" href="site.css?v=97b3fc8de2">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"KRNL0","applicationCategory":"ProductivityApplication","operatingSystem":"Windows, macOS, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"description":"Timer, to-dos, habits, calendar, clock, focus sounds and analytics on one canvas, working together. Free, no account, and your plans stay on your computer.","author":{"@type":"Person","name":"theMindDeveloper","url":"https://github.com/theMindDeveloper"},"downloadUrl":"https://github.com/theMindDeveloper/krnl0/releases/latest","softwareVersion":"0.15.0"}</script>
 </head>
@@ -45,7 +45,16 @@
     <a href="server.html">Your own server</a>
     <a href="#faq">Questions</a>
   </nav>
+  <button type="button" class="nav-menu" aria-label="More links" aria-expanded="false" aria-controls="nav-sheet"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
   <a class="btn btn-sm" href="download.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M4 19.5h16"/></svg>Download</a>
+  <div class="nav-sheet" id="nav-sheet" hidden>
+    <a href="#replaces">One app</a>
+    <a href="#day">A day in it</a>
+    <a href="download.html">How to install</a>
+    <a href="server.html">Your own server</a>
+    <a href="#faq">Questions</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
 </header>
 
 <main id="main">
@@ -392,8 +401,8 @@
   </div>
 </footer>
 
-<div class="dock" id="dock"><button type="button" class="btn btn-acid" id="dock-send">Send the link to my computer</button></div>
+<div class="dock" id="dock"><button type="button" class="btn btn-acid" id="dock-send">Send to my computer</button></div>
 
-<script src="site.js?v=c2e9e3f64a" defer></script>
+<script src="site.js?v=80f8dda3c1" defer></script>
 </body>
 </html>
