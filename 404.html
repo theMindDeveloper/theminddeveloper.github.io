@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <title>Not found</title>
 <script>
+  // /krnl0/anything -> krnl0.com/anything (the KRNL0 site moved to its own domain)
+  if (/^\/krnl0(\/|$)/i.test(location.pathname)) {
+    location.replace('https://krnl0.com' + (location.pathname.replace(/^\/krnl0/i, '') || '/') + location.search + location.hash);
+  }
   // /llm/anything -> /largelanguagemind/anything
   var p = location.pathname;
   if (/^\/llm(\/|$)/i.test(p)) {
